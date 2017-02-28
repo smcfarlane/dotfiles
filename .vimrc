@@ -8,36 +8,49 @@ set laststatus=2              " always display the status line
 set showcmd                   " Show us the command we're typing
 set hlsearch                  " highlight search items
 set guifont=Ubuntu\ Mono:h18
+
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
+
 " zoom a vim pane, <C-w>= to re-balance
 nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
 nnoremap <leader>= :wincmd =<cr>
 
+" Blunt hammer to ignore things from searches
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.yardoc/*,*.exe,*.so,*.dat
+
 set relativenumber
 " set nice line breaks
-" set breakindent
-" set showbreak=\ \ \~~
+set breakindent
+set showbreak=\ \ \~~
+" Disable line wrapping
+" set nowrap
 
 " hitting ESC is hard
 inoremap jk <Esc>
+
 " Remap ctrl + s to :w + enter
 noremap <c-s> :w<CR>
 inoremap <c-s> <Esc>:w<CR>
+
 " remap stupid command misspellings
 nmap :Q :q
 nmap :W :w
+
 " Better Screen Splitting
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
 " redefine the normal window spliting directions
 set splitbelow
 set splitright
+
 " Enable mouse in Iterm
 set mouse=a
 set ttymouse=xterm2
+
 " Arrow keys are bad
 noremap <Up> <NOP>
 noremap <Down> <NOP>
@@ -85,6 +98,7 @@ Plugin 'mxw/vim-jsx'                      " jsx
 Plugin 'itchyny/lightline.vim'            " lightline
 Plugin 'gregsexton/matchtag'              " matchtag, for html tag
 Plugin 'terryma/vim-multiple-cursors'     " multiple-cursors
+Plugin 'neomake/neomake'
 Plugin 'scrooloose/nerdtree'              " nerdtree
 Plugin 'scrooloose/nerdcommenter'         " nerdcommenter
 Plugin 'tmux-plugins/vim-tmux'            " vim tmux
@@ -93,7 +107,7 @@ Plugin 'tpope/vim-repeat'                 " vim repeat
 Plugin 'vim-ruby/vim-ruby'                " ruby
 Plugin 'ervandew/supertab'                " supertab
 Plugin 'tpope/vim-surround'               " surround
-Plugin 'scrooloose/syntastic'             " syntastic
+" Plugin 'scrooloose/syntastic'             " syntastic
 Plugin 'sjl/vitality.vim'                 " vitality, make vim and tmux play nice together
 
 
@@ -151,25 +165,38 @@ nnoremap <Left> :bprev<CR>
 " bbye config
 nnoremap <Leader>q :Bdelete<CR>
 
-" Syntastic config
-nmap eh :SyntasticReset<CR>
-nmap ec :SyntasticCheck<CR>
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" neomake config
+autocmd! BufEnter,BufWritePost * Neomake
+let g:neomake_ruby_enabled_makers = ["rubocop"]
+let g:neomake_haml_enabled_makers = ["hamllint"]
+let g:neomake_scss_enabled_makers = ["scss-lint"]
+let g:neomake_yaml_enabled_makers = ["yamllint"]
+let g:neomake_css_enabled_makers = ["css-lint"]
+let g:neomake_javascript_enabled_makers = ["eslint"]
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_enable_signs=1
-let g:syntastic_auto_jump=0
-let g:syntastic_check_on_wq=0
-let g:syntastic_ruby_checkers=['rubocop', 'mri']
-let g:syntastic_python_checkers=['pep8', 'pylint', 'python']
-let g:syntastic_html_checkers=['']
-let g:syntastic_scss_checkers = ['scss_lint']
-let syntastic_mode_map = { 'passive_filetypes': ['html', 'erb'] }
+let g:neomake_serialize = 1
+let g:neomake_open_list = 1
+let g:neomake_serialize_abort_on_error = 1
+
+" Syntastic config
+" nmap eh :SyntasticReset<CR>
+" nmap ec :SyntasticCheck<CR>
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 0
+" let g:syntastic_check_on_wq = 0
+" let g:syntastic_enable_signs=1
+" let g:syntastic_auto_jump=0
+" let g:syntastic_check_on_wq=0
+" let g:syntastic_ruby_checkers=['rubocop', 'mri']
+" let g:syntastic_python_checkers=['pep8', 'pylint', 'python']
+" let g:syntastic_html_checkers=['']
+" let g:syntastic_scss_checkers = ['scss_lint']
+" let syntastic_mode_map = { 'passive_filetypes': ['html', 'erb'] }
 
 " Tabular
 " nmap <Leader>a= :Tabularize /=<CR>
@@ -214,7 +241,7 @@ endif
 
 " Ignore some folders and files for CtrlP indexing
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.yardoc\|log\|tmp$|node_modules$',
+  \ 'dir':  '\.git\|\.yardoc\|log\|tmp|node_modules',
   \ 'file': '\.so$\|\.dat$|\.DS_Store$'
   \ }
 

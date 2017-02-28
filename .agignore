@@ -1,0 +1,6 @@
+.git/
+tmp/
+log/
+bin/
+couchdb/
+*.min.js
