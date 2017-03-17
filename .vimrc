@@ -19,10 +19,13 @@ nnoremap <leader>= :wincmd =<cr>
 " Blunt hammer to ignore things from searches
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.yardoc/*,*.exe,*.so,*.dat
 
+" set relative line numbering
 set relativenumber
+
 " set nice line breaks
 set breakindent
 set showbreak=\ \ \~~
+
 " Disable line wrapping
 " set nowrap
 
@@ -51,11 +54,11 @@ set splitright
 set mouse=a
 set ttymouse=xterm2
 
-" Arrow keys are bad
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
+" Arrow keys are bad, this gets annoying fast, I'll be better later
+" noremap <Up> <NOP>
+" noremap <Down> <NOP>
+" noremap <Left> <NOP>
+" noremap <Right> <NOP>
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
@@ -77,19 +80,15 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'mileszs/ack.vim'                  " Ack
-" Plugin 'vim-airline/vim-airline-themes'   " airline-themes
 Plugin 'moll/vim-bbye'                    " bbye
 Plugin 'ntpeters/vim-better-whitespace'   " better-whitespace
 Plugin 'jeetsukumaran/vim-buffergator'    " buffergator
-" Plugin 'ap/vim-buftabline'                " buftabline
 Plugin 'ctrlpvim/ctrlp.vim'               " ctrlp
-" Plugin 'flazz/vim-colorschemes'           " colorschemes
 Plugin 'kchmck/vim-coffee-script'         " coffee-script
 Plugin 'altercation/vim-colors-solarized' " colors-solarized
 Plugin 'raimondi/delimitmate'             " delimitmate
 Plugin 'mattn/emmet-vim'                  " emmet
 Plugin 'tpope/vim-endwise'                " endwise
-" Plugin 'dkprice/vim-easygrep'             " easygrep
 Plugin 'tpope/vim-fugitive'               " fugitive
 Plugin 'airblade/vim-gitgutter'           " gitgutter
 Plugin 'yggdroot/indentline'              " indentline
@@ -99,6 +98,7 @@ Plugin 'itchyny/lightline.vim'            " lightline
 Plugin 'gregsexton/matchtag'              " matchtag, for html tag
 Plugin 'terryma/vim-multiple-cursors'     " multiple-cursors
 Plugin 'neomake/neomake'
+Plugin 'thoughtbot/vim-rspec'             " rspec
 Plugin 'scrooloose/nerdtree'              " nerdtree
 Plugin 'scrooloose/nerdcommenter'         " nerdcommenter
 Plugin 'tmux-plugins/vim-tmux'            " vim tmux
@@ -107,10 +107,14 @@ Plugin 'tpope/vim-repeat'                 " vim repeat
 Plugin 'vim-ruby/vim-ruby'                " ruby
 Plugin 'ervandew/supertab'                " supertab
 Plugin 'tpope/vim-surround'               " surround
-" Plugin 'scrooloose/syntastic'             " syntastic
 Plugin 'sjl/vitality.vim'                 " vitality, make vim and tmux play nice together
 
 
+" Plugin 'vim-airline/vim-airline-themes'   " airline-themes
+" Plugin 'ap/vim-buftabline'                " buftabline
+" Plugin 'flazz/vim-colorschemes'           " colorschemes
+" Plugin 'dkprice/vim-easygrep'             " easygrep
+" Plugin 'scrooloose/syntastic'             " syntastic
 " Plugin 'bling/vim-airline'                " airline
 " Plugin 'wikitopian/hardmode'              " hardmode
 " Plugin 'wincent/command-t'                " command t
@@ -118,7 +122,6 @@ Plugin 'sjl/vitality.vim'                 " vitality, make vim and tmux play nic
 " Plugin 'joshdick/onedark.vim'             " onedark
 " Plugin 'rking/ag.vim'                     " ag
 " Plugin 'vim-scripts/vim-auto-save'        " auto-save
-" Plugin 'thoughtbot/vim-rspec'             " rspec
 " Plugin 'godlygeek/tabular'                " tabular
 " Plugin 'tpope/vim-unimpaired'             " unimpaired
 " Plugin 'sjl/gundo.vim'                    " gundo
@@ -138,35 +141,14 @@ let g:lightline = {
       \ }
 
 " Make buffer switching easier
-nnoremap <Right> :bnext<CR>
-nnoremap <Left> :bprev<CR>
-
-
-" Airline Config
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline_theme='solarized'
-" unicode symbols
-" let g:airline_left_sep = ''
-" let g:airline_left_sep = ''
-" let g:airline_right_sep = ''
-" let g:airline_right_sep = ''
-
-" let g:airline_left_sep = ''
-" let g:airline_left_alt_sep = ''
-" let g:airline_right_sep = ''
-" let g:airline_right_alt_sep = ''
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#tabline#tab_nr_type = 1
-" let g:airline#extensions#tabline#buffer_idx_mode = 1
-" let g:airline#extensions#tabline#buffer_nr_show = 1
-" let g:airline#extensions#tabline#fnamecollapse = 1
-" let g:airline#extensions#tabline#buffer_min_count = 2
+" nnoremap <Right> :bnext<CR>
+" nnoremap <Left> :bprev<CR>
 
 " bbye config
 nnoremap <Leader>q :Bdelete<CR>
 
 " neomake config
-autocmd! BufEnter,BufWritePost * Neomake
+autocmd! BufReadPost,BufWritePost * Neomake
 let g:neomake_ruby_enabled_makers = ["rubocop"]
 let g:neomake_haml_enabled_makers = ["hamllint"]
 let g:neomake_scss_enabled_makers = ["scss-lint"]
@@ -175,28 +157,15 @@ let g:neomake_css_enabled_makers = ["css-lint"]
 let g:neomake_javascript_enabled_makers = ["eslint"]
 
 let g:neomake_serialize = 1
-let g:neomake_open_list = 1
+let g:neomake_open_list = 2
 let g:neomake_serialize_abort_on_error = 1
 
-" Syntastic config
-" nmap eh :SyntasticReset<CR>
-" nmap ec :SyntasticCheck<CR>
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
+" rspec config
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>tn :call RunNearestSpec()<CR>
+map <Leader>tl :call RunLastSpec()<CR>
+map <Leader>ta :call RunAllSpecs()<CR>
 
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 0
-" let g:syntastic_check_on_wq = 0
-" let g:syntastic_enable_signs=1
-" let g:syntastic_auto_jump=0
-" let g:syntastic_check_on_wq=0
-" let g:syntastic_ruby_checkers=['rubocop', 'mri']
-" let g:syntastic_python_checkers=['pep8', 'pylint', 'python']
-" let g:syntastic_html_checkers=['']
-" let g:syntastic_scss_checkers = ['scss_lint']
-" let syntastic_mode_map = { 'passive_filetypes': ['html', 'erb'] }
 
 " Tabular
 " nmap <Leader>a= :Tabularize /=<CR>
@@ -239,6 +208,9 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 
+cnoreabbrev Ack Ack!
+nnoremap <Leader>a :Ack!<Space>
+
 " Ignore some folders and files for CtrlP indexing
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\.git\|\.yardoc\|log\|tmp|node_modules',
@@ -249,10 +221,6 @@ let g:ctrlp_custom_ignore = {
 let g:user_emmet_leader_key='<C-e>'
 
 " Indent guide configuration
-" let g:indent_guides_start_level=2
-" let g:indent_guides_auto_colors=0
-" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#ffff87   ctermbg=3
-" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#ffd7ff   ctermbg=4
 let g:indentLine_char = '|'
 
 " multicursor config
@@ -263,7 +231,7 @@ let g:multi_cursor_quit_key='<Esc>'
 
 " Syntax Settings
 syntax on
-set background=light
+set background=dark
 colorscheme solarized
 
 filetype plugin indent on    " required
