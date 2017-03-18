@@ -102,6 +102,7 @@ Plugin 'thoughtbot/vim-rspec'             " rspec
 Plugin 'scrooloose/nerdtree'              " nerdtree
 Plugin 'scrooloose/nerdcommenter'         " nerdcommenter
 Plugin 'tmux-plugins/vim-tmux'            " vim tmux
+Plugin 'benmills/vimux'                   " vimux, send commands to tmux pane
 Plugin 'tpope/vim-rails'                  " rails
 Plugin 'tpope/vim-repeat'                 " vim repeat
 Plugin 'vim-ruby/vim-ruby'                " ruby
@@ -166,6 +167,14 @@ map <Leader>tn :call RunNearestSpec()<CR>
 map <Leader>tl :call RunLastSpec()<CR>
 map <Leader>ta :call RunAllSpecs()<CR>
 
+" vimux shortcuts
+map <leader>vp :VimuxPromptCommand<CR>
+map <leader>vl :VimuxRunLastCommand<CR>
+map <Leader>vi :VimuxInspectRunner<CR>
+map <Leader>vq :VimuxCloseRunner<CR>
+map <Leader>vs :VimuxInterruptRunner<CR>
+map <Leader>vc :VimuxClearRunnerHistory<CR>
+map <Leader>vz :VimuxZoomRunner<CR>
 
 " Tabular
 " nmap <Leader>a= :Tabularize /=<CR>
