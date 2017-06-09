@@ -1,9 +1,9 @@
 " Basic Settings
-set nocompatible              " be iMproved, required
+set nocompatible              " be improved, required
 filetype off                  " required
 set clipboard^=unnamed        " configure terminal vim to use mac clipboard
 let mapleader="\<space>"      " remap leader to <space> bar
-"set backspace=2              " make backspace work like most other apps
+set backspace=2              " make backspace work like most other apps
 set laststatus=2              " always display the status line
 set showcmd                   " Show us the command we're typing
 set hlsearch                  " highlight search items
@@ -86,17 +86,21 @@ Plugin 'jeetsukumaran/vim-buffergator'    " buffergator
 Plugin 'ctrlpvim/ctrlp.vim'               " ctrlp
 Plugin 'kchmck/vim-coffee-script'         " coffee-script
 Plugin 'altercation/vim-colors-solarized' " colors-solarized
+Plugin 'flazz/vim-colorschemes'           " colorschemes
 Plugin 'raimondi/delimitmate'             " delimitmate
+Plugin 'editorconfig/editorconfig-vim'    " editorconfig
 Plugin 'mattn/emmet-vim'                  " emmet
 Plugin 'tpope/vim-endwise'                " endwise
 Plugin 'tpope/vim-fugitive'               " fugitive
 Plugin 'airblade/vim-gitgutter'           " gitgutter
+Plugin 'fatih/vim-go'                     " vim-go
 Plugin 'yggdroot/indentline'              " indentline
 Plugin 'pangloss/vim-javascript'          " javascript
 Plugin 'mxw/vim-jsx'                      " jsx
 Plugin 'itchyny/lightline.vim'            " lightline
 Plugin 'gregsexton/matchtag'              " matchtag, for html tag
 Plugin 'terryma/vim-multiple-cursors'     " multiple-cursors
+Plugin 'mustache/vim-mustache-handlebars' " hbs
 Plugin 'neomake/neomake'
 Plugin 'thoughtbot/vim-rspec'             " rspec
 Plugin 'scrooloose/nerdtree'              " nerdtree
@@ -107,13 +111,16 @@ Plugin 'tpope/vim-rails'                  " rails
 Plugin 'tpope/vim-repeat'                 " vim repeat
 Plugin 'vim-ruby/vim-ruby'                " ruby
 Plugin 'ervandew/supertab'                " supertab
+Plugin 'slim-template/vim-slim.git'       " slim template highlighting
 Plugin 'tpope/vim-surround'               " surround
+Plugin 'leafgarland/typescript-vim'       " typescript
+Plugin 'quramy/tsuquyomi'                 " more typescript
 Plugin 'sjl/vitality.vim'                 " vitality, make vim and tmux play nice together
+Plugin 'posva/vim-vue'                    " vue
 
 
 " Plugin 'vim-airline/vim-airline-themes'   " airline-themes
 " Plugin 'ap/vim-buftabline'                " buftabline
-" Plugin 'flazz/vim-colorschemes'           " colorschemes
 " Plugin 'dkprice/vim-easygrep'             " easygrep
 " Plugin 'scrooloose/syntastic'             " syntastic
 " Plugin 'bling/vim-airline'                " airline
@@ -134,11 +141,9 @@ Plugin 'sjl/vitality.vim'                 " vitality, make vim and tmux play nic
 call vundle#end()            " required
 
 " Lightline Config
-if !has('gui_running')
-  set t_Co=256
-endif
+set t_Co=256
 let g:lightline = {
-      \ 'colorscheme': 'solarized',
+      \ 'colorscheme': 'jellybeans',
       \ }
 
 " Make buffer switching easier
@@ -159,6 +164,7 @@ let g:neomake_javascript_enabled_makers = ["eslint"]
 
 let g:neomake_serialize = 1
 let g:neomake_open_list = 2
+let g:neomake_list_height = 4
 let g:neomake_serialize_abort_on_error = 1
 
 " rspec config
@@ -238,10 +244,13 @@ let g:multi_cursor_prev_key='<C-P>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
 
+" editorconfig config
+let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
+
 " Syntax Settings
 syntax on
 set background=dark
-colorscheme solarized
+colorscheme Tomorrow-Night
 
 filetype plugin indent on    " required
 
