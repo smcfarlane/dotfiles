@@ -1,13 +1,18 @@
 " Basic Settings
-set nocompatible              " be improved, required
-filetype off                  " required
+set nocompatible              " be improved, required filetype off                  " required
 set clipboard^=unnamed        " configure terminal vim to use mac clipboard
 let mapleader="\<space>"      " remap leader to <space> bar
-set backspace=2              " make backspace work like most other apps
+set backspace=2               " make backspace work like most other apps
 set laststatus=2              " always display the status line
 set showcmd                   " Show us the command we're typing
 set hlsearch                  " highlight search items
-set guifont=Ubuntu\ Mono:h18
+
+if has("gui_running")
+  set macligatures
+  set guifont=Fira\ Code:h16
+else
+  set guifont=Fira\ Code:h16
+endif
 
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
@@ -26,6 +31,11 @@ set relativenumber
 set breakindent
 set showbreak=\ \ \~~
 
+" indentation config
+" fix indentation for whole file with ,fef
+nnoremap <leader>fef :normal! gg=G``<CR>
+set tabstop=4 softtabstop=0 expandtab shiftwidth=2 smarttab
+
 " Disable line wrapping
 " set nowrap
 
@@ -40,11 +50,12 @@ inoremap <c-s> <Esc>:w<CR>
 nmap :Q :q
 nmap :W :w
 
-" Better Screen Splitting
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+" this is easier but I need to get used to the way normal vim does it
+" Better Screen Movement
+" nnoremap <C-J> <C-W><C-J>
+" nnoremap <C-K> <C-W><C-K>
+" nnoremap <C-L> <C-W><C-L>
+" nnoremap <C-H> <C-W><C-H>
 
 " redefine the normal window spliting directions
 set splitbelow
@@ -54,13 +65,19 @@ set splitright
 set mouse=a
 set ttymouse=xterm2
 
+" Ruby autocomplete
+autocmd FileType ruby,eruby,haml,slim let g:rubycomplete_buffer_loading = 1
+autocmd FileType ruby,eruby,haml,slim let g:rubycomplete_classes_in_global = 1
+autocmd FileType ruby,eruby,haml,slim let g:rubycomplete_rails = 1
+
+" JS setings
+let g:javascript_plugin_flow = 1
+
 " Arrow keys are bad, this gets annoying fast, I'll be better later
 " noremap <Up> <NOP>
 " noremap <Down> <NOP>
 " noremap <Left> <NOP>
 " noremap <Right> <NOP>
-" bind K to grep word under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " Change cursor shape in insert mode
 if exists($TMUX)
@@ -84,25 +101,18 @@ Plugin 'moll/vim-bbye'                    " bbye
 Plugin 'ntpeters/vim-better-whitespace'   " better-whitespace
 Plugin 'jeetsukumaran/vim-buffergator'    " buffergator
 Plugin 'ctrlpvim/ctrlp.vim'               " ctrlp
-Plugin 'kchmck/vim-coffee-script'         " coffee-script
 Plugin 'altercation/vim-colors-solarized' " colors-solarized
-Plugin 'flazz/vim-colorschemes'           " colorschemes
 Plugin 'raimondi/delimitmate'             " delimitmate
-Plugin 'editorconfig/editorconfig-vim'    " editorconfig
 Plugin 'mattn/emmet-vim'                  " emmet
 Plugin 'tpope/vim-endwise'                " endwise
 Plugin 'tpope/vim-fugitive'               " fugitive
-Plugin 'airblade/vim-gitgutter'           " gitgutter
-Plugin 'fatih/vim-go'                     " vim-go
 Plugin 'yggdroot/indentline'              " indentline
 Plugin 'pangloss/vim-javascript'          " javascript
 Plugin 'mxw/vim-jsx'                      " jsx
 Plugin 'itchyny/lightline.vim'            " lightline
 Plugin 'gregsexton/matchtag'              " matchtag, for html tag
 Plugin 'terryma/vim-multiple-cursors'     " multiple-cursors
-Plugin 'mustache/vim-mustache-handlebars' " hbs
-Plugin 'neomake/neomake'
-Plugin 'thoughtbot/vim-rspec'             " rspec
+Plugin 'neomake/neomake'                  " neomake
 Plugin 'scrooloose/nerdtree'              " nerdtree
 Plugin 'scrooloose/nerdcommenter'         " nerdcommenter
 Plugin 'tmux-plugins/vim-tmux'            " vim tmux
@@ -113,65 +123,66 @@ Plugin 'vim-ruby/vim-ruby'                " ruby
 Plugin 'ervandew/supertab'                " supertab
 Plugin 'slim-template/vim-slim.git'       " slim template highlighting
 Plugin 'tpope/vim-surround'               " surround
-Plugin 'leafgarland/typescript-vim'       " typescript
-Plugin 'quramy/tsuquyomi'                 " more typescript
+Plugin 'chriskempson/vim-tomorrow-theme'  " Tomorrow themes
+" Plugin 'keith/swift.vim'                  " swift
+" Plugin 'mitsuse/autocomplete-swift'       " swift auto complete
 Plugin 'sjl/vitality.vim'                 " vitality, make vim and tmux play nice together
-Plugin 'posva/vim-vue'                    " vue
 
 
-" Plugin 'vim-airline/vim-airline-themes'   " airline-themes
+" Plugin 'posva/vim-vue'                    " vue
+" Plugin 'airblade/vim-gitgutter'           " gitgutter
+" Plugin 'flazz/vim-colorschemes'           " colorschemes
+" Plugin 'chriskempson/base16-vim'          " more colorschemes
+" Plugin 'kchmck/vim-coffee-script'         " coffee-script
+" Plugin 'vim-scripts/CSApprox'             " make gui colorshemes work in terminal
+" Plugin 'editorconfig/editorconfig-vim'    " editorconfig
+" Plugin 'fatih/vim-go'                     " vim-go
+" Plugin 'thoughtbot/vim-rspec'             " rspec
+" Plugin 'leafgarland/typescript-vim'       " typescript
+" Plugin 'quramy/tsuquyomi'                 " more typescript
+" Plugin 'mustache/vim-mustache-handlebars' " hbs
 " Plugin 'ap/vim-buftabline'                " buftabline
-" Plugin 'dkprice/vim-easygrep'             " easygrep
-" Plugin 'scrooloose/syntastic'             " syntastic
 " Plugin 'bling/vim-airline'                " airline
 " Plugin 'wikitopian/hardmode'              " hardmode
 " Plugin 'wincent/command-t'                " command t
 " Plugin 'Xuyuanp/nerdtree-git-plugin'      " nerdtree-git-plugin
 " Plugin 'joshdick/onedark.vim'             " onedark
-" Plugin 'rking/ag.vim'                     " ag
 " Plugin 'vim-scripts/vim-auto-save'        " auto-save
 " Plugin 'godlygeek/tabular'                " tabular
 " Plugin 'tpope/vim-unimpaired'             " unimpaired
 " Plugin 'sjl/gundo.vim'                    " gundo
-" Plugin 'valloric/youcompleteme'
-" Plugin 'nathanaelkane/vim-indent-guides'
-" Plugin 'bendavis78/vim-polymer'
+" Plugin 'bendavis78/vim-polymer'           " Polymer
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 
-" Lightline Config
-set t_Co=256
-let g:lightline = {
-      \ 'colorscheme': 'jellybeans',
-      \ }
-
 " Make buffer switching easier
-" nnoremap <Right> :bnext<CR>
-" nnoremap <Left> :bprev<CR>
+nnoremap <leader><Right> :bnext<CR>
+nnoremap <leader><Left> :bprev<CR>
 
 " bbye config
 nnoremap <Leader>q :Bdelete<CR>
 
 " neomake config
-autocmd! BufReadPost,BufWritePost * Neomake
+" autocmd! BufReadPost,BufWritePost * Neomake
+autocmd! BufWritePost * Neomake
 let g:neomake_ruby_enabled_makers = ["rubocop"]
 let g:neomake_haml_enabled_makers = ["hamllint"]
-let g:neomake_scss_enabled_makers = ["scss-lint"]
+let g:neomake_scss_enabled_makers = ["scsslint"]
 let g:neomake_yaml_enabled_makers = ["yamllint"]
 let g:neomake_css_enabled_makers = ["css-lint"]
 let g:neomake_javascript_enabled_makers = ["eslint"]
 
 let g:neomake_serialize = 1
-let g:neomake_open_list = 2
+let g:neomake_open_list = 0
 let g:neomake_list_height = 4
 let g:neomake_serialize_abort_on_error = 1
 
 " rspec config
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>tn :call RunNearestSpec()<CR>
-map <Leader>tl :call RunLastSpec()<CR>
-map <Leader>ta :call RunAllSpecs()<CR>
+" map <Leader>t :call RunCurrentSpecFile()<CR>
+" map <Leader>tn :call RunNearestSpec()<CR>
+" map <Leader>tl :call RunLastSpec()<CR>
+" map <Leader>ta :call RunAllSpecs()<CR>
 
 " vimux shortcuts
 map <leader>vp :VimuxPromptCommand<CR>
@@ -188,14 +199,9 @@ map <Leader>vz :VimuxZoomRunner<CR>
 " nmap <Leader>a: :Tabularize /:\zs<CR>
 " vmap <Leader>a: :Tabularize /:\zs<CR>
 
-" indentation config
-" fix indentation for whole file with ,fef
-nnoremap <leader>fef :normal! gg=G``<CR>
-set tabstop=4 softtabstop=0 expandtab shiftwidth=2 smarttab
-
 " Config NERDTree
 map <C-a> :NERDTreeToggle<CR>
-let NERDTreeIgnore=['.DS_Store']
+let NERDTreeIgnore=['.DS_Store', '*.swp', '*.swo']
 let NERDTreeShowBookmarks=0         "show bookmarks on startup
 let NERDTreeHighlightCursorline=1   "Highlight the selected entry in the tree
 let NERDTreeShowLineNumbers=0
@@ -204,10 +210,9 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 " Config NERDCommenter
 let NERDSpaceDelims=1               " space around delimiters
-let NERDRemoveExtraSpaces=1"
+let NERDRemoveExtraSpaces=1
 
 " remap control p plugin key
-" map <C-f> :CtrlP<CR>
 map <leader>p :CtrlPBuffer<CR>
 
 "" The Silver Searcher
@@ -219,7 +224,7 @@ if executable('ag')
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
   let g:ctrlp_user_command = 'ag %s -l --hidden --nocolor -g ""'
 
-  " " ag is fast enough that CtrlP doesn't need to cache
+  " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 endif
 
@@ -247,10 +252,60 @@ let g:multi_cursor_quit_key='<Esc>'
 " editorconfig config
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
+" Lightline Config
+
+let g:lightline = {
+    \ 'colorscheme': 'jellybeans',
+    \ 'active': {
+    \   'left': [ [ 'mode', 'paste' ],
+    \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
+    \   'right': [ [ 'lineinfo' ],
+    \              [ 'percent' ],
+    \              [ 'filetype' ] ]
+    \ },
+    \ 'component_function': {
+    \   'gitbranch': 'fugitive#head'
+    \ },
+  \ }
+
 " Syntax Settings
-syntax on
-set background=dark
-colorscheme Tomorrow-Night
+set term=xterm-256color
+if !has('gui_running')
+  set t_Co=256
+endif
+" visual selection fix
+if exists($TMUX)
+  set t_ut=
+endif
+syntax enable
+
+function! SetSolarized()
+  let g:solarized_termcolors = 16 " only needed when using iTerm2's solarized theme
+  let g:solarized_visibility = "high"
+  let g:solarized_contrast = "high"
+  let g:solarized_termtrans = 1
+  let g:solarized_termcolors = 16 " only needed when using iTerm2's solarized theme
+  colorscheme solarized
+endfunction
+call SetSolarized()
+
+function! SetTomorrowNight()
+  set background=dark
+  colorscheme Tomorrow-Night
+endfunction
+
+function! SetTomorrow()
+  set background=light
+  colorscheme Tomorrow
+endfunction
+
+if has("gui_running")
+  call SetTomorrowNight()
+  " call SetSolarized()
+else
+  call SetTomorrowNight()
+  " call SetSolarized()
+endif
 
 filetype plugin indent on    " required
 
