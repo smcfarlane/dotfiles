@@ -1,0 +1,29 @@
+[user]
+	name = Steven McFarlane
+	email = stevemac72@gmail.com
+[core]
+	autocrlf = input
+	editor = vim
+	excludesfile = /Users/stevenmcfarlane/.gitignore
+[push]
+	default = simple
+    followTags = true
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	undolast = reset --soft HEAD~
+	last = log -1 HEAD
+    prune = fetch --prune
+    undo = reset --soft HEAD^
+    stash-all = stash save --include-untracked
+    glog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+[merge]
+    ff = only
+[status]
+    showUntrackedFiles = all
+[diff]
+  tool = icdiff
+[difftool]
+  prompt = false

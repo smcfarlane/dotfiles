@@ -24,8 +24,17 @@ nnoremap <leader>= :wincmd =<cr>
 " Blunt hammer to ignore things from searches
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.yardoc/*,*.exe,*.so,*.dat
 
-" set relative line numbering
+" set relative line numbering hybrid number mode
+set number
 set relativenumber
+" Auto-toggle line numbers
+" relative line numbers for normal mode
+" normal line numbers for insert mode
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
 
 " set nice line breaks
 set breakindent
@@ -103,9 +112,10 @@ Plugin 'jeetsukumaran/vim-buffergator'    " buffergator
 Plugin 'ctrlpvim/ctrlp.vim'               " ctrlp
 Plugin 'altercation/vim-colors-solarized' " colors-solarized
 Plugin 'raimondi/delimitmate'             " delimitmate
+" Plugin 'ekalinin/Dockerfile.vim'          " highlighting for dockerfiles
 Plugin 'mattn/emmet-vim'                  " emmet
 Plugin 'tpope/vim-endwise'                " endwise
-Plugin 'tpope/vim-fugitive'               " fugitive
+" Plugin 'tpope/vim-fugitive'               " fugitive
 Plugin 'yggdroot/indentline'              " indentline
 Plugin 'pangloss/vim-javascript'          " javascript
 Plugin 'mxw/vim-jsx'                      " jsx
@@ -167,22 +177,16 @@ nnoremap <Leader>q :Bdelete<CR>
 " autocmd! BufReadPost,BufWritePost * Neomake
 autocmd! BufWritePost * Neomake
 let g:neomake_ruby_enabled_makers = ["rubocop"]
-let g:neomake_haml_enabled_makers = ["hamllint"]
-let g:neomake_scss_enabled_makers = ["scsslint"]
-let g:neomake_yaml_enabled_makers = ["yamllint"]
-let g:neomake_css_enabled_makers = ["css-lint"]
+" let g:neomake_haml_enabled_makers = ["hamllint"]
+" let g:neomake_scss_enabled_makers = ["scsslint"]
+" let g:neomake_yaml_enabled_makers = ["yamllint"]
+" let g:neomake_css_enabled_makers = ["css-lint"]
 let g:neomake_javascript_enabled_makers = ["eslint"]
 
 let g:neomake_serialize = 1
 let g:neomake_open_list = 0
 let g:neomake_list_height = 4
 let g:neomake_serialize_abort_on_error = 1
-
-" rspec config
-" map <Leader>t :call RunCurrentSpecFile()<CR>
-" map <Leader>tn :call RunNearestSpec()<CR>
-" map <Leader>tl :call RunLastSpec()<CR>
-" map <Leader>ta :call RunAllSpecs()<CR>
 
 " vimux shortcuts
 map <leader>vp :VimuxPromptCommand<CR>
@@ -192,12 +196,6 @@ map <Leader>vq :VimuxCloseRunner<CR>
 map <Leader>vs :VimuxInterruptRunner<CR>
 map <Leader>vc :VimuxClearRunnerHistory<CR>
 map <Leader>vz :VimuxZoomRunner<CR>
-
-" Tabular
-" nmap <Leader>a= :Tabularize /=<CR>
-" vmap <Leader>a= :Tabularize /=<CR>
-" nmap <Leader>a: :Tabularize /:\zs<CR>
-" vmap <Leader>a: :Tabularize /:\zs<CR>
 
 " Config NERDTree
 map <C-a> :NERDTreeToggle<CR>
