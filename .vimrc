@@ -9,9 +9,9 @@ set hlsearch                  " highlight search items
 
 if has("gui_running")
   set macligatures
-  set guifont=Fira\ Code:h16
+  set guifont=Fira\ Code
 else
-  set guifont=Fira\ Code:h16
+  set guifont=Fira\ Code
 endif
 
 " automatically rebalance windows on vim resize
@@ -89,11 +89,15 @@ let g:javascript_plugin_flow = 1
 " noremap <Right> <NOP>
 
 " Change cursor shape in insert mode
-if exists($TMUX)
+if $TERM ==# 'screen-256color'
+  set notermguicolors
+  let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
+  let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
   let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
   let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
   let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
 else
+  set termguicolors
   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
   let &t_SR = "\<Esc>]50;CursorShape=2\x7"
   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
@@ -110,9 +114,11 @@ Plugin 'moll/vim-bbye'                    " bbye
 Plugin 'ntpeters/vim-better-whitespace'   " better-whitespace
 Plugin 'jeetsukumaran/vim-buffergator'    " buffergator
 Plugin 'ctrlpvim/ctrlp.vim'               " ctrlp
-Plugin 'altercation/vim-colors-solarized' " colors-solarized
+Plugin 'altercation/vim-colors-solarized' " colors-solarized theme
+Plugin 'nightsense/carbonized'            " carbonized theme
+Plugin 'nightsense/vimspectr'
 Plugin 'raimondi/delimitmate'             " delimitmate
-" Plugin 'ekalinin/Dockerfile.vim'          " highlighting for dockerfiles
+Plugin 'ekalinin/Dockerfile.vim'          " highlighting for dockerfiles
 Plugin 'mattn/emmet-vim'                  " emmet
 Plugin 'tpope/vim-endwise'                " endwise
 " Plugin 'tpope/vim-fugitive'               " fugitive
@@ -120,7 +126,7 @@ Plugin 'yggdroot/indentline'              " indentline
 Plugin 'pangloss/vim-javascript'          " javascript
 Plugin 'mxw/vim-jsx'                      " jsx
 Plugin 'itchyny/lightline.vim'            " lightline
-Plugin 'gregsexton/matchtag'              " matchtag, for html tag
+" Plugin 'gregsexton/matchtag'              " matchtag, for html tag
 Plugin 'terryma/vim-multiple-cursors'     " multiple-cursors
 Plugin 'neomake/neomake'                  " neomake
 Plugin 'scrooloose/nerdtree'              " nerdtree
@@ -179,7 +185,7 @@ autocmd! BufWritePost * Neomake
 let g:neomake_ruby_enabled_makers = ["rubocop"]
 " let g:neomake_haml_enabled_makers = ["hamllint"]
 " let g:neomake_scss_enabled_makers = ["scsslint"]
-" let g:neomake_yaml_enabled_makers = ["yamllint"]
+let g:neomake_yaml_enabled_makers = ["yamllint"]
 " let g:neomake_css_enabled_makers = ["css-lint"]
 let g:neomake_javascript_enabled_makers = ["eslint"]
 
@@ -250,8 +256,79 @@ let g:multi_cursor_quit_key='<Esc>'
 " editorconfig config
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
-" Lightline Config
 
+" Syntax Settings
+if !has('gui_running')
+  set t_Co=256
+endif
+" visual selection fix
+if $TERM ==# 'screen-256color'
+  set t_ut=
+endif
+
+syntax enable
+
+function! SetSolarized()
+  set background=light
+  let g:solarized_termcolors = 16 " only needed when using iTerm2's solarized theme
+  let g:solarized_visibility = "high"
+  let g:solarized_contrast = "high"
+  let g:solarized_termtrans = 1
+  let g:solarized_termcolors = 16 " only needed when using iTerm2's solarized theme
+  colorscheme solarized
+endfunction
+
+function! SetTomorrowNight()
+  set background=dark
+  colorscheme Tomorrow-Night
+endfunction
+
+function! SetTomorrow()
+  set background=light
+  colorscheme Tomorrow
+endfunction
+
+function! SetCarbonize()
+  set background=light
+  colorscheme carbonized-light
+endfunction
+
+function! SetVimspectr()
+  if strftime("%H") < 7 || strftime("%H") >= 19
+    let themes = [
+      \ 'vimspectr0-dark'   , 'vimspectr0-dark'    , 'vimspectr30-dark'  ,
+      \ 'vimspectr60-dark'  , 'vimspectr90-dark'   , 'vimspectr120-dark' ,
+      \ 'vimspectr150-dark' , 'vimspectr180-dark'  , 'vimspectr210-dark' ,
+      \ 'vimspectr240-dark' , 'vimspectr270-dark'  , 'vimspectr300-dark' ,
+      \ 'vimspectr330-dark' , 'vimspectrgrey-dark'
+      \ ]
+  else
+    let themes = [
+      \ 'vimspectr0-light'  , 'vimspectr0-light'   , 'vimspectr30-light' ,
+      \ 'vimspectr60-light' , 'vimspectr90-light'  , 'vimspectr120-light',
+      \ 'vimspectr150-light', 'vimspectr180-light' , 'vimspectr210-light',
+      \ 'vimspectr240-light', 'vimspectr270-light' , 'vimspectr300-light',
+      \ 'vimspectr330-light', 'vimspectrgrey-light'
+      \ ]
+  endif
+  exe 'colorscheme '.themes[localtime() % len(themes)]
+endfunction
+
+if has("gui_running")
+  " call SetTomorrowNight()
+  " call SetSolarized()
+  " call SetCarbonize()
+  call SetVimspectr()
+else
+  " call SetTomorrowNight()
+  " call SetSolarized()
+  " call SetCarbonize()
+  call SetVimspectr()
+endif
+
+" Lightline Config
+" dark theme = jellybeans
+" light theme = solarized
 let g:lightline = {
     \ 'colorscheme': 'jellybeans',
     \ 'active': {
@@ -265,45 +342,6 @@ let g:lightline = {
     \   'gitbranch': 'fugitive#head'
     \ },
   \ }
-
-" Syntax Settings
-set term=xterm-256color
-if !has('gui_running')
-  set t_Co=256
-endif
-" visual selection fix
-if exists($TMUX)
-  set t_ut=
-endif
-syntax enable
-
-function! SetSolarized()
-  let g:solarized_termcolors = 16 " only needed when using iTerm2's solarized theme
-  let g:solarized_visibility = "high"
-  let g:solarized_contrast = "high"
-  let g:solarized_termtrans = 1
-  let g:solarized_termcolors = 16 " only needed when using iTerm2's solarized theme
-  colorscheme solarized
-endfunction
-call SetSolarized()
-
-function! SetTomorrowNight()
-  set background=dark
-  colorscheme Tomorrow-Night
-endfunction
-
-function! SetTomorrow()
-  set background=light
-  colorscheme Tomorrow
-endfunction
-
-if has("gui_running")
-  call SetTomorrowNight()
-  " call SetSolarized()
-else
-  call SetTomorrowNight()
-  " call SetSolarized()
-endif
 
 filetype plugin indent on    " required
 
