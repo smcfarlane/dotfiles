@@ -59,13 +59,6 @@ inoremap <c-s> <Esc>:w<CR>
 nmap :Q :q
 nmap :W :w
 
-" this is easier but I need to get used to the way normal vim does it
-" Better Screen Movement
-" nnoremap <C-J> <C-W><C-J>
-" nnoremap <C-K> <C-W><C-K>
-" nnoremap <C-L> <C-W><C-L>
-" nnoremap <C-H> <C-W><C-H>
-
 " redefine the normal window spliting directions
 set splitbelow
 set splitright
@@ -81,12 +74,6 @@ autocmd FileType ruby,eruby,haml,slim let g:rubycomplete_rails = 1
 
 " JS setings
 let g:javascript_plugin_flow = 1
-
-" Arrow keys are bad, this gets annoying fast, I'll be better later
-" noremap <Up> <NOP>
-" noremap <Down> <NOP>
-" noremap <Left> <NOP>
-" noremap <Right> <NOP>
 
 " Change cursor shape in insert mode
 if $TERM ==# 'screen-256color'
@@ -114,19 +101,14 @@ Plugin 'moll/vim-bbye'                    " bbye
 Plugin 'ntpeters/vim-better-whitespace'   " better-whitespace
 Plugin 'jeetsukumaran/vim-buffergator'    " buffergator
 Plugin 'ctrlpvim/ctrlp.vim'               " ctrlp
-Plugin 'altercation/vim-colors-solarized' " colors-solarized theme
-Plugin 'nightsense/carbonized'            " carbonized theme
-Plugin 'nightsense/vimspectr'
 Plugin 'raimondi/delimitmate'             " delimitmate
 Plugin 'ekalinin/Dockerfile.vim'          " highlighting for dockerfiles
 Plugin 'mattn/emmet-vim'                  " emmet
 Plugin 'tpope/vim-endwise'                " endwise
-" Plugin 'tpope/vim-fugitive'               " fugitive
 Plugin 'yggdroot/indentline'              " indentline
 Plugin 'pangloss/vim-javascript'          " javascript
 Plugin 'mxw/vim-jsx'                      " jsx
 Plugin 'itchyny/lightline.vim'            " lightline
-" Plugin 'gregsexton/matchtag'              " matchtag, for html tag
 Plugin 'terryma/vim-multiple-cursors'     " multiple-cursors
 Plugin 'neomake/neomake'                  " neomake
 Plugin 'scrooloose/nerdtree'              " nerdtree
@@ -139,35 +121,38 @@ Plugin 'vim-ruby/vim-ruby'                " ruby
 Plugin 'ervandew/supertab'                " supertab
 Plugin 'slim-template/vim-slim.git'       " slim template highlighting
 Plugin 'tpope/vim-surround'               " surround
-Plugin 'chriskempson/vim-tomorrow-theme'  " Tomorrow themes
-" Plugin 'keith/swift.vim'                  " swift
-" Plugin 'mitsuse/autocomplete-swift'       " swift auto complete
 Plugin 'sjl/vitality.vim'                 " vitality, make vim and tmux play nice together
 
+" Themes
+Plugin 'nightsense/office'                " Office theme
+Plugin 'felipesousa/rupza'                " Rupza theme
+Plugin 'chriskempson/vim-tomorrow-theme'  " Tomorrow themes
+Plugin 'altercation/vim-colors-solarized' " colors-solarized theme
+Plugin 'nightsense/carbonized'            " carbonized theme
+Plugin 'nightsense/vimspectr'             " Theme with many hues
+Plugin 'nightsense/vim-crunchbang'        " crunchbang theme
 
+" Plugin 'tpope/vim-fugitive'               " fugitive
+" Plugin 'gregsexton/matchtag'              " matchtag, for html tag
 " Plugin 'posva/vim-vue'                    " vue
 " Plugin 'airblade/vim-gitgutter'           " gitgutter
 " Plugin 'flazz/vim-colorschemes'           " colorschemes
 " Plugin 'chriskempson/base16-vim'          " more colorschemes
 " Plugin 'kchmck/vim-coffee-script'         " coffee-script
 " Plugin 'vim-scripts/CSApprox'             " make gui colorshemes work in terminal
-" Plugin 'editorconfig/editorconfig-vim'    " editorconfig
 " Plugin 'fatih/vim-go'                     " vim-go
-" Plugin 'thoughtbot/vim-rspec'             " rspec
 " Plugin 'leafgarland/typescript-vim'       " typescript
 " Plugin 'quramy/tsuquyomi'                 " more typescript
 " Plugin 'mustache/vim-mustache-handlebars' " hbs
 " Plugin 'ap/vim-buftabline'                " buftabline
 " Plugin 'bling/vim-airline'                " airline
-" Plugin 'wikitopian/hardmode'              " hardmode
 " Plugin 'wincent/command-t'                " command t
 " Plugin 'Xuyuanp/nerdtree-git-plugin'      " nerdtree-git-plugin
 " Plugin 'joshdick/onedark.vim'             " onedark
-" Plugin 'vim-scripts/vim-auto-save'        " auto-save
 " Plugin 'godlygeek/tabular'                " tabular
 " Plugin 'tpope/vim-unimpaired'             " unimpaired
 " Plugin 'sjl/gundo.vim'                    " gundo
-" Plugin 'bendavis78/vim-polymer'           " Polymer
+" Plugin 'keith/swift.vim'                  " swift
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -253,10 +238,6 @@ let g:multi_cursor_prev_key='<C-P>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
 
-" editorconfig config
-let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
-
-
 " Syntax Settings
 if !has('gui_running')
   set t_Co=256
@@ -295,21 +276,23 @@ endfunction
 
 function! SetVimspectr()
   if strftime("%H") < 7 || strftime("%H") >= 19
-    let themes = [
-      \ 'vimspectr0-dark'   , 'vimspectr0-dark'    , 'vimspectr30-dark'  ,
-      \ 'vimspectr60-dark'  , 'vimspectr90-dark'   , 'vimspectr120-dark' ,
-      \ 'vimspectr150-dark' , 'vimspectr180-dark'  , 'vimspectr210-dark' ,
-      \ 'vimspectr240-dark' , 'vimspectr270-dark'  , 'vimspectr300-dark' ,
-      \ 'vimspectr330-dark' , 'vimspectrgrey-dark'
-      \ ]
+    " let themes = [
+      " \ 'vimspectr30-dark',
+      " \ 'vimspectr60-dark',
+      " \ 'vimspectr210-dark',
+      " \ 'vimspectr300-dark',
+      " \ 'vimspectrgrey-dark'
+      " \ ]
+    let themes = ['vimspectr60-dark']
   else
-    let themes = [
-      \ 'vimspectr0-light'  , 'vimspectr0-light'   , 'vimspectr30-light' ,
-      \ 'vimspectr60-light' , 'vimspectr90-light'  , 'vimspectr120-light',
-      \ 'vimspectr150-light', 'vimspectr180-light' , 'vimspectr210-light',
-      \ 'vimspectr240-light', 'vimspectr270-light' , 'vimspectr300-light',
-      \ 'vimspectr330-light', 'vimspectrgrey-light'
-      \ ]
+    " let themes = [
+      " \ 'vimspectr30-light',
+      " \ 'vimspectr60-light',
+      " \ 'vimspectr210-light',
+      " \ 'vimspectr300-light',
+      " \ 'vimspectrgrey-light'
+      " \ ]
+    let themes = ['vimspectr60-light']
   endif
   exe 'colorscheme '.themes[localtime() % len(themes)]
 endfunction
@@ -318,12 +301,16 @@ if has("gui_running")
   " call SetTomorrowNight()
   " call SetSolarized()
   " call SetCarbonize()
-  call SetVimspectr()
+  " call SetVimspectr()
+  " color vimspectr60-dark
+  color office-dark
 else
   " call SetTomorrowNight()
   " call SetSolarized()
   " call SetCarbonize()
-  call SetVimspectr()
+  " call SetVimspectr()
+  " color vimspectr60-dark
+  color office-light
 endif
 
 " Lightline Config
