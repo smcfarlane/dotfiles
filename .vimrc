@@ -9,7 +9,8 @@ set hlsearch                  " highlight search items
 
 if has("gui_running")
   set macligatures
-  set guifont=Fira\ Code
+  set guifont=Fira\ Code:h20
+  set guioptions=
 else
   set guifont=Fira\ Code
 endif
@@ -30,11 +31,11 @@ set relativenumber
 " Auto-toggle line numbers
 " relative line numbers for normal mode
 " normal line numbers for insert mode
-augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-augroup END
+" augroup numbertoggle
+  " autocmd!
+  " autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  " autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+" augroup END
 
 " set nice line breaks
 set breakindent
@@ -84,7 +85,7 @@ if $TERM ==# 'screen-256color'
   let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
   let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
 else
-  set termguicolors
+  " set termguicolors
   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
   let &t_SR = "\<Esc>]50;CursorShape=2\x7"
   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
@@ -113,15 +114,15 @@ Plugin 'terryma/vim-multiple-cursors'     " multiple-cursors
 Plugin 'neomake/neomake'                  " neomake
 Plugin 'scrooloose/nerdtree'              " nerdtree
 Plugin 'scrooloose/nerdcommenter'         " nerdcommenter
-Plugin 'tmux-plugins/vim-tmux'            " vim tmux
-Plugin 'benmills/vimux'                   " vimux, send commands to tmux pane
+" Plugin 'tmux-plugins/vim-tmux'            " vim tmux
+" Plugin 'benmills/vimux'                   " vimux, send commands to tmux pane
 Plugin 'tpope/vim-rails'                  " rails
 Plugin 'tpope/vim-repeat'                 " vim repeat
 Plugin 'vim-ruby/vim-ruby'                " ruby
 Plugin 'ervandew/supertab'                " supertab
 Plugin 'slim-template/vim-slim.git'       " slim template highlighting
 Plugin 'tpope/vim-surround'               " surround
-Plugin 'sjl/vitality.vim'                 " vitality, make vim and tmux play nice together
+" Plugin 'sjl/vitality.vim'                 " vitality, make vim and tmux play nice together
 
 " Themes
 Plugin 'nightsense/office'                " Office theme
@@ -180,13 +181,13 @@ let g:neomake_list_height = 4
 let g:neomake_serialize_abort_on_error = 1
 
 " vimux shortcuts
-map <leader>vp :VimuxPromptCommand<CR>
-map <leader>vl :VimuxRunLastCommand<CR>
-map <Leader>vi :VimuxInspectRunner<CR>
-map <Leader>vq :VimuxCloseRunner<CR>
-map <Leader>vs :VimuxInterruptRunner<CR>
-map <Leader>vc :VimuxClearRunnerHistory<CR>
-map <Leader>vz :VimuxZoomRunner<CR>
+" map <leader>vp :VimuxPromptCommand<CR>
+" map <leader>vl :VimuxRunLastCommand<CR>
+" map <Leader>vi :VimuxInspectRunner<CR>
+" map <Leader>vq :VimuxCloseRunner<CR>
+" map <Leader>vs :VimuxInterruptRunner<CR>
+" map <Leader>vc :VimuxClearRunnerHistory<CR>
+" map <Leader>vz :VimuxZoomRunner<CR>
 
 " Config NERDTree
 map <C-a> :NERDTreeToggle<CR>
@@ -239,28 +240,24 @@ let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
 
 " Syntax Settings
-if !has('gui_running')
+syntax enable
+" if !has('gui_running')
   set t_Co=256
-endif
-" visual selection fix
+" endif
+
+" visual selection fix in tmux
 if $TERM ==# 'screen-256color'
   set t_ut=
 endif
 
-syntax enable
-
 function! SetSolarized()
   set background=light
-  let g:solarized_termcolors = 16 " only needed when using iTerm2's solarized theme
-  let g:solarized_visibility = "high"
-  let g:solarized_contrast = "high"
-  let g:solarized_termtrans = 1
   let g:solarized_termcolors = 16 " only needed when using iTerm2's solarized theme
   colorscheme solarized
 endfunction
 
 function! SetTomorrowNight()
-  set background=dark
+  set background=light
   colorscheme Tomorrow-Night
 endfunction
 
@@ -297,27 +294,27 @@ function! SetVimspectr()
   exe 'colorscheme '.themes[localtime() % len(themes)]
 endfunction
 
-if has("gui_running")
+" if has("gui_running")
   " call SetTomorrowNight()
   " call SetSolarized()
   " call SetCarbonize()
   " call SetVimspectr()
   " color vimspectr60-dark
-  color office-dark
-else
+  " color office-light
+" else
   " call SetTomorrowNight()
-  " call SetSolarized()
+  call SetSolarized()
   " call SetCarbonize()
   " call SetVimspectr()
   " color vimspectr60-dark
-  color office-light
-endif
+  " color office-dark
+" endif
 
 " Lightline Config
 " dark theme = jellybeans
 " light theme = solarized
 let g:lightline = {
-    \ 'colorscheme': 'jellybeans',
+    \ 'colorscheme': 'solarized',
     \ 'active': {
     \   'left': [ [ 'mode', 'paste' ],
     \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
