@@ -1,6 +1,6 @@
 " Basic Settings
 set nocompatible              " be improved, required filetype off                  " required
-set clipboard^=unnamed        " configure terminal vim to use mac clipboard
+set clipboard=unnamed         " configure terminal vim to use mac clipboard
 let mapleader="\<space>"      " remap leader to <space> bar
 set backspace=2               " make backspace work like most other apps
 set laststatus=2              " always display the status line
@@ -31,11 +31,11 @@ set relativenumber
 " Auto-toggle line numbers
 " relative line numbers for normal mode
 " normal line numbers for insert mode
-" augroup numbertoggle
-  " autocmd!
-  " autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-  " autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-" augroup END
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
 
 " set nice line breaks
 set breakindent
@@ -106,6 +106,7 @@ Plugin 'raimondi/delimitmate'             " delimitmate
 Plugin 'ekalinin/Dockerfile.vim'          " highlighting for dockerfiles
 Plugin 'mattn/emmet-vim'                  " emmet
 Plugin 'tpope/vim-endwise'                " endwise
+Plugin 'airblade/vim-gitgutter'           " gitgutter
 Plugin 'yggdroot/indentline'              " indentline
 Plugin 'pangloss/vim-javascript'          " javascript
 Plugin 'mxw/vim-jsx'                      " jsx
@@ -113,16 +114,19 @@ Plugin 'itchyny/lightline.vim'            " lightline
 Plugin 'terryma/vim-multiple-cursors'     " multiple-cursors
 Plugin 'neomake/neomake'                  " neomake
 Plugin 'scrooloose/nerdtree'              " nerdtree
+Plugin 'Xuyuanp/nerdtree-git-plugin'      " nerdtree-git-plugin
 Plugin 'scrooloose/nerdcommenter'         " nerdcommenter
-" Plugin 'tmux-plugins/vim-tmux'            " vim tmux
-" Plugin 'benmills/vimux'                   " vimux, send commands to tmux pane
 Plugin 'tpope/vim-rails'                  " rails
 Plugin 'tpope/vim-repeat'                 " vim repeat
 Plugin 'vim-ruby/vim-ruby'                " ruby
 Plugin 'ervandew/supertab'                " supertab
 Plugin 'slim-template/vim-slim.git'       " slim template highlighting
 Plugin 'tpope/vim-surround'               " surround
-" Plugin 'sjl/vitality.vim'                 " vitality, make vim and tmux play nice together
+
+" Tmux
+Plugin 'sjl/vitality.vim'                 " vitality, make vim and tmux play nice together
+Plugin 'tmux-plugins/vim-tmux'            " vim tmux
+Plugin 'benmills/vimux'                   " vimux, send commands to tmux pane
 
 " Themes
 Plugin 'nightsense/office'                " Office theme
@@ -136,7 +140,6 @@ Plugin 'nightsense/vim-crunchbang'        " crunchbang theme
 " Plugin 'tpope/vim-fugitive'               " fugitive
 " Plugin 'gregsexton/matchtag'              " matchtag, for html tag
 " Plugin 'posva/vim-vue'                    " vue
-" Plugin 'airblade/vim-gitgutter'           " gitgutter
 " Plugin 'flazz/vim-colorschemes'           " colorschemes
 " Plugin 'chriskempson/base16-vim'          " more colorschemes
 " Plugin 'kchmck/vim-coffee-script'         " coffee-script
@@ -148,7 +151,6 @@ Plugin 'nightsense/vim-crunchbang'        " crunchbang theme
 " Plugin 'ap/vim-buftabline'                " buftabline
 " Plugin 'bling/vim-airline'                " airline
 " Plugin 'wincent/command-t'                " command t
-" Plugin 'Xuyuanp/nerdtree-git-plugin'      " nerdtree-git-plugin
 " Plugin 'joshdick/onedark.vim'             " onedark
 " Plugin 'godlygeek/tabular'                " tabular
 " Plugin 'tpope/vim-unimpaired'             " unimpaired
@@ -181,13 +183,13 @@ let g:neomake_list_height = 4
 let g:neomake_serialize_abort_on_error = 1
 
 " vimux shortcuts
-" map <leader>vp :VimuxPromptCommand<CR>
-" map <leader>vl :VimuxRunLastCommand<CR>
-" map <Leader>vi :VimuxInspectRunner<CR>
-" map <Leader>vq :VimuxCloseRunner<CR>
-" map <Leader>vs :VimuxInterruptRunner<CR>
-" map <Leader>vc :VimuxClearRunnerHistory<CR>
-" map <Leader>vz :VimuxZoomRunner<CR>
+map <leader>vp :VimuxPromptCommand<CR>
+map <leader>vl :VimuxRunLastCommand<CR>
+map <Leader>vi :VimuxInspectRunner<CR>
+map <Leader>vq :VimuxCloseRunner<CR>
+map <Leader>vs :VimuxInterruptRunner<CR>
+map <Leader>vc :VimuxClearRunnerHistory<CR>
+map <Leader>vz :VimuxZoomRunner<CR>
 
 " Config NERDTree
 map <C-a> :NERDTreeToggle<CR>
@@ -217,9 +219,12 @@ if executable('ag')
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 endif
+let g:ackhighlight = 1
+let g:ack_autofold_results = 1
+let g:ackpreview = 1
 
 cnoreabbrev Ack Ack!
-nnoremap <Leader>a :Ack!<Space>
+nnoremap <Leader>a :Ack!<Space>'
 
 " Ignore some folders and files for CtrlP indexing
 let g:ctrlp_custom_ignore = {
@@ -241,9 +246,9 @@ let g:multi_cursor_quit_key='<Esc>'
 
 " Syntax Settings
 syntax enable
-" if !has('gui_running')
+if !has('gui_running')
   set t_Co=256
-" endif
+endif
 
 " visual selection fix in tmux
 if $TERM ==# 'screen-256color'
@@ -251,8 +256,10 @@ if $TERM ==# 'screen-256color'
 endif
 
 function! SetSolarized()
-  set background=light
-  let g:solarized_termcolors = 16 " only needed when using iTerm2's solarized theme
+  set background=dark
+  if !has('gui_running')
+    let g:solarized_termcolors = 16 " only needed when using iTerm2's solarized theme
+  endif
   colorscheme solarized
 endfunction
 
@@ -328,4 +335,7 @@ let g:lightline = {
   \ }
 
 filetype plugin indent on    " required
+
+" Autocomplete
+set omnifunc=syntaxcomplete#Complete
 
