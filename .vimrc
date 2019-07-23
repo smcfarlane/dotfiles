@@ -42,8 +42,6 @@ set breakindent
 set showbreak=\ \ \~~
 
 " indentation config
-" fix indentation for whole file with ,fef
-nnoremap <leader>fef :normal! gg=G``<CR>
 set tabstop=4 softtabstop=0 expandtab shiftwidth=2 smarttab
 
 " Disable line wrapping
@@ -64,6 +62,10 @@ nmap :W :w
 set splitbelow
 set splitright
 
+" Make buffer switching easier
+nnoremap <leader><Right> :bnext<CR>
+nnoremap <leader><Left> :bprev<CR>
+
 " Enable mouse in Iterm
 set mouse=a
 set ttymouse=xterm2
@@ -76,93 +78,66 @@ autocmd FileType ruby,eruby,haml,slim let g:rubycomplete_rails = 1
 " JS setings
 let g:javascript_plugin_flow = 1
 
-" Change cursor shape in insert mode
-if $TERM ==# 'screen-256color'
-  set notermguicolors
-  let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
-  let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
-  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-  let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
-  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-else
-  " set termguicolors
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-endif
+call plug#begin('~/.vim/plugged')
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-Plugin 'VundleVim/Vundle.vim'
-
-Plugin 'mileszs/ack.vim'                  " Ack
-Plugin 'moll/vim-bbye'                    " bbye
-Plugin 'ntpeters/vim-better-whitespace'   " better-whitespace
-Plugin 'jeetsukumaran/vim-buffergator'    " buffergator
-Plugin 'ctrlpvim/ctrlp.vim'               " ctrlp
-Plugin 'raimondi/delimitmate'             " delimitmate
-Plugin 'ekalinin/Dockerfile.vim'          " highlighting for dockerfiles
-Plugin 'mattn/emmet-vim'                  " emmet
-Plugin 'tpope/vim-endwise'                " endwise
-Plugin 'airblade/vim-gitgutter'           " gitgutter
-Plugin 'yggdroot/indentline'              " indentline
-Plugin 'pangloss/vim-javascript'          " javascript
-Plugin 'mxw/vim-jsx'                      " jsx
-Plugin 'itchyny/lightline.vim'            " lightline
-Plugin 'terryma/vim-multiple-cursors'     " multiple-cursors
-Plugin 'neomake/neomake'                  " neomake
-Plugin 'scrooloose/nerdtree'              " nerdtree
-Plugin 'Xuyuanp/nerdtree-git-plugin'      " nerdtree-git-plugin
-Plugin 'scrooloose/nerdcommenter'         " nerdcommenter
-Plugin 'tpope/vim-rails'                  " rails
-Plugin 'tpope/vim-repeat'                 " vim repeat
-Plugin 'vim-ruby/vim-ruby'                " ruby
-Plugin 'ervandew/supertab'                " supertab
-Plugin 'slim-template/vim-slim.git'       " slim template highlighting
-Plugin 'tpope/vim-surround'               " surround
-
-" Tmux
-Plugin 'sjl/vitality.vim'                 " vitality, make vim and tmux play nice together
-Plugin 'tmux-plugins/vim-tmux'            " vim tmux
-Plugin 'benmills/vimux'                   " vimux, send commands to tmux pane
+Plug 'moll/vim-bbye'                    " bbye
+Plug 'ntpeters/vim-better-whitespace'   " better-whitespace
+Plug 'hail2u/vim-css3-syntax'           " css3 syntax
+Plug 'jeetsukumaran/vim-buffergator'    " buffergator
+Plug 'raimondi/delimitmate'             " delimitmate (automatic bracket closing)
+Plug 'ekalinin/Dockerfile.vim'          " highlighting for dockerfiles
+Plug 'mattn/emmet-vim'                  " emmet
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'                 " fzf
+Plug 'fatih/vim-go'                     " vim-go
+Plug 'tpope/vim-endwise'                " endwise
+Plug 'tpope/vim-fugitive'               " fugitive
+Plug 'airblade/vim-gitgutter'           " gitgutter
+Plug 'yggdroot/indentline'              " indentline
+Plug 'pangloss/vim-javascript'          " javascript
+Plug 'mxw/vim-jsx'                      " jsx
+Plug 'itchyny/lightline.vim'            " lightline
+Plug 'terryma/vim-multiple-cursors'     " multiple-cursors
+Plug 'neomake/neomake'                  " neomake
+Plug 'scrooloose/nerdtree'              " nerdtree
+Plug 'Xuyuanp/nerdtree-git-plugin'      " nerdtree-git-plugin
+Plug 'scrooloose/nerdcommenter'         " nerdcommenter
+Plug 'tpope/vim-rails'                  " rails
+Plug 'tpope/vim-repeat'                 " vim repeat
+Plug 'vim-ruby/vim-ruby'                " ruby
+Plug 'tpope/vim-sensible'               " sensible vim defaults
+Plug 'ervandew/supertab'                " supertab
+Plug 'slim-template/vim-slim'           " slim template highlighting
+Plug 'tpope/vim-surround'               " surround
 
 " Themes
-Plugin 'nightsense/office'                " Office theme
-Plugin 'felipesousa/rupza'                " Rupza theme
-Plugin 'chriskempson/vim-tomorrow-theme'  " Tomorrow themes
-Plugin 'altercation/vim-colors-solarized' " colors-solarized theme
-Plugin 'nightsense/carbonized'            " carbonized theme
-Plugin 'nightsense/vimspectr'             " Theme with many hues
-Plugin 'nightsense/vim-crunchbang'        " crunchbang theme
+Plug 'nightsense/office'                " Office theme
+Plug 'felipesousa/rupza'                " Rupza theme
+Plug 'chriskempson/vim-tomorrow-theme'  " Tomorrow themes
+Plug 'altercation/vim-colors-solarized' " colors-solarized theme
+Plug 'nightsense/vimspectr'             " Theme with many hues
+Plug 'junegunn/seoul256.vim'            " seoul theme
+" Plug 'chriskempson/base16-vim'          " Base16 themes
+" Plug 'nightsense/carbonized'            " carbonized theme
+" Plug 'nightsense/vim-crunchbang'        " crunchbang theme
 
-" Plugin 'tpope/vim-fugitive'               " fugitive
-" Plugin 'gregsexton/matchtag'              " matchtag, for html tag
-" Plugin 'posva/vim-vue'                    " vue
-" Plugin 'flazz/vim-colorschemes'           " colorschemes
-" Plugin 'chriskempson/base16-vim'          " more colorschemes
-" Plugin 'kchmck/vim-coffee-script'         " coffee-script
-" Plugin 'vim-scripts/CSApprox'             " make gui colorshemes work in terminal
-" Plugin 'fatih/vim-go'                     " vim-go
-" Plugin 'leafgarland/typescript-vim'       " typescript
-" Plugin 'quramy/tsuquyomi'                 " more typescript
-" Plugin 'mustache/vim-mustache-handlebars' " hbs
-" Plugin 'ap/vim-buftabline'                " buftabline
-" Plugin 'bling/vim-airline'                " airline
-" Plugin 'wincent/command-t'                " command t
-" Plugin 'joshdick/onedark.vim'             " onedark
-" Plugin 'godlygeek/tabular'                " tabular
-" Plugin 'tpope/vim-unimpaired'             " unimpaired
-" Plugin 'sjl/gundo.vim'                    " gundo
-" Plugin 'keith/swift.vim'                  " swift
+" Tmux
+Plug 'sjl/vitality.vim'                 " vitality, make vim and tmux play nice together
+Plug 'tmux-plugins/vim-tmux'            " vim tmux
+Plug 'benmills/vimux'                   " vimux, send commands to tmux pane
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
+" Plug 'mileszs/ack.vim'                  " Ack
+" Plug 'ctrlpvim/ctrlp.vim'               " ctrlp
+" Plug 'gregsexton/matchtag'              " matchtag, for html tag
+" Plug 'flazz/vim-colorschemes'           " colorschemes
+" Plug 'vim-scripts/CSApprox'             " make gui colorshemes work in terminal
+" Plug 'mustache/vim-mustache-handlebars' " hbs
+" Plug 'joshdick/onedark.vim'             " onedark
+" Plug 'godlygeek/tabular'                " tabular
+" Plug 'tpope/vim-unimpaired'             " unimpaired
+" Plug 'sjl/gundo.vim'                    " gundo
 
-" Make buffer switching easier
-nnoremap <leader><Right> :bnext<CR>
-nnoremap <leader><Left> :bprev<CR>
+call plug#end()
 
 " bbye config
 nnoremap <Leader>q :Bdelete<CR>
@@ -204,33 +179,52 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 let NERDSpaceDelims=1               " space around delimiters
 let NERDRemoveExtraSpaces=1
 
-" remap control p plugin key
-map <leader>p :CtrlPBuffer<CR>
+" fzf Config
+" This is the default extra key bindings
+"take over ctrlp
+nnoremap <C-p> :Files<Cr>
 
-"" The Silver Searcher
-if executable('ag')
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
-  let g:ackprg = 'ag --vimgrep'
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
 
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --hidden --nocolor -g ""'
+" Default fzf layout
+" - down / up / left / right
+let g:fzf_layout = { 'down': '~40%' }
 
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-endif
-let g:ackhighlight = 1
-let g:ack_autofold_results = 1
-let g:ackpreview = 1
+" Customize fzf colors to match your color scheme
+let g:fzf_colors =
+      \ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Conditional'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
 
-cnoreabbrev Ack Ack!
-nnoremap <Leader>a :Ack!<Space>'
+" Enable per-command history.
+" CTRL-N and CTRL-P will be automatically bound to next-history and
+" previous-history instead of down and up. If you don't like the change,
+" explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
+let g:fzf_history_dir = '~/.local/share/fzf-history'
 
-" Ignore some folders and files for CtrlP indexing
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git\|\.yardoc\|log\|tmp|node_modules',
-  \ 'file': '\.so$\|\.dat$|\.DS_Store$'
-  \ }
+" Similarly, we can apply it to fzf#vim#grep. To use ripgrep instead of ag:
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case'.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " Change leader key for emmet
 let g:user_emmet_leader_key='<C-e>'
@@ -244,18 +238,45 @@ let g:multi_cursor_prev_key='<C-P>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
 
+" Lightline Config
+let g:lightline = {
+    \ 'colorscheme': 'seoul256',
+    \ 'active': {
+    \   'left': [ [ 'mode', 'paste' ],
+    \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
+    \   'right': [ [ 'lineinfo' ],
+    \              [ 'percent' ],
+    \              [ 'filetype' ] ]
+    \ },
+    \ 'component_function': {
+    \   'gitbranch': 'fugitive#head'
+    \ },
+  \ }
+
 " Syntax Settings
 syntax enable
 if !has('gui_running')
   set t_Co=256
 endif
 
+" For when slim highlighting doesn't work
+autocmd BufNewFile,BufRead *.slim set ft=slim
+
 " visual selection fix in tmux
 if $TERM ==# 'screen-256color'
   set t_ut=
+  set term=screen-256color
 endif
 
-function! SetSolarized()
+function! SetSolarizedLight()
+  set background=light
+  if !has('gui_running')
+    let g:solarized_termcolors = 16 " only needed when using iTerm2's solarized theme
+  endif
+  colorscheme solarized
+endfunction
+
+function! SetSolarizedDark()
   set background=dark
   if !has('gui_running')
     let g:solarized_termcolors = 16 " only needed when using iTerm2's solarized theme
@@ -276,6 +297,20 @@ endfunction
 function! SetCarbonize()
   set background=light
   colorscheme carbonized-light
+endfunction
+
+function! SetSeoul256()
+  "   Range:   233 (darkest) ~ 239 (lightest)
+  "   Default: 237
+  let g:seoul256_background = 235
+  colorscheme seoul256
+endfunction
+
+function! SetSeoul256Light()
+  "   Range:   252 (darkest) ~ 256 (lightest)
+  "   Default: 253
+  let g:seoul256_background = 254
+  colorscheme seoul256-light
 endfunction
 
 function! SetVimspectr()
@@ -301,41 +336,41 @@ function! SetVimspectr()
   exe 'colorscheme '.themes[localtime() % len(themes)]
 endfunction
 
-" if has("gui_running")
-  " call SetTomorrowNight()
-  " call SetSolarized()
-  " call SetCarbonize()
-  " call SetVimspectr()
-  " color vimspectr60-dark
-  " color office-light
-" else
-  " call SetTomorrowNight()
-  call SetSolarized()
-  " call SetCarbonize()
-  " call SetVimspectr()
-  " color vimspectr60-dark
-  " color office-dark
-" endif
-
-" Lightline Config
-" dark theme = jellybeans
-" light theme = solarized
-let g:lightline = {
-    \ 'colorscheme': 'solarized',
-    \ 'active': {
-    \   'left': [ [ 'mode', 'paste' ],
-    \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
-    \   'right': [ [ 'lineinfo' ],
-    \              [ 'percent' ],
-    \              [ 'filetype' ] ]
-    \ },
-    \ 'component_function': {
-    \   'gitbranch': 'fugitive#head'
-    \ },
-  \ }
+" call SetSolarizedLight()
+" call SetTomorrowNight()
+call SetSeoul256()
+" colorscheme base16-bespin
 
 filetype plugin indent on    " required
-
 " Autocomplete
 set omnifunc=syntaxcomplete#Complete
+
+" remap control p plugin key
+" map <leader>p :CtrlPBuffer<CR>
+
+"" The Silver Searcher
+" if executable('ag')
+  " Use ag over grep
+  " set grepprg=ag\ --nogroup\ --nocolor
+  " let g:ackprg = 'ag --vimgrep'
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  " let g:ctrlp_user_command = 'ag %s -l --hidden --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  " let g:ctrlp_use_caching = 0
+" endif
+" let g:ackhighlight = 1
+" let g:ack_autofold_results = 1
+" let g:ackpreview = 0
+
+" cnoreabbrev Ack Ack!
+" nnoremap <Leader>a :Ack!<Space>"
+
+" Ignore some folders and files for CtrlP indexing
+" let g:ctrlp_custom_ignore = {
+  " \ 'dir':  '\.git\|\.yardoc\|log\|tmp|node_modules',
+  " \ 'file': '\.so$\|\.dat$|\.DS_Store$'
+  " \ }
+
 
