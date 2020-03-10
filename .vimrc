@@ -80,13 +80,17 @@ let g:javascript_plugin_flow = 1
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'dense-analysis/ale'               " ALE linter / fixer
+Plug 'maximbaz/lightline-ale'           " integrate ale with lightline
 Plug 'moll/vim-bbye'                    " bbye
 Plug 'ntpeters/vim-better-whitespace'   " better-whitespace
 Plug 'hail2u/vim-css3-syntax'           " css3 syntax
 Plug 'jeetsukumaran/vim-buffergator'    " buffergator
 Plug 'raimondi/delimitmate'             " delimitmate (automatic bracket closing)
 Plug 'ekalinin/Dockerfile.vim'          " highlighting for dockerfiles
+Plug 'tpope/vim-dispatch'               " async shell commands
 Plug 'mattn/emmet-vim'                  " emmet
+Plug 'tpope/vim-fireplace'              " clojure stuff
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'                 " fzf
 Plug 'fatih/vim-go'                     " vim-go
@@ -98,17 +102,21 @@ Plug 'pangloss/vim-javascript'          " javascript
 Plug 'mxw/vim-jsx'                      " jsx
 Plug 'itchyny/lightline.vim'            " lightline
 Plug 'terryma/vim-multiple-cursors'     " multiple-cursors
-Plug 'neomake/neomake'                  " neomake
+" Plug 'neomake/neomake'                  " neomake
 Plug 'scrooloose/nerdtree'              " nerdtree
 Plug 'Xuyuanp/nerdtree-git-plugin'      " nerdtree-git-plugin
 Plug 'scrooloose/nerdcommenter'         " nerdcommenter
 Plug 'tpope/vim-rails'                  " rails
 Plug 'tpope/vim-repeat'                 " vim repeat
 Plug 'vim-ruby/vim-ruby'                " ruby
+Plug 'tpope/vim-salve'                  " clojure and leiningen stuff
 Plug 'tpope/vim-sensible'               " sensible vim defaults
 Plug 'ervandew/supertab'                " supertab
 Plug 'slim-template/vim-slim'           " slim template highlighting
 Plug 'tpope/vim-surround'               " surround
+Plug 'cespare/vim-toml'                 " toml
+Plug 'leafgarland/typescript-vim'
+Plug 'ianks/vim-tsx'
 
 " Themes
 Plug 'nightsense/office'                " Office theme
@@ -117,6 +125,7 @@ Plug 'chriskempson/vim-tomorrow-theme'  " Tomorrow themes
 Plug 'altercation/vim-colors-solarized' " colors-solarized theme
 Plug 'nightsense/vimspectr'             " Theme with many hues
 Plug 'junegunn/seoul256.vim'            " seoul theme
+Plug 'wadackel/vim-dogrun'
 " Plug 'chriskempson/base16-vim'          " Base16 themes
 " Plug 'nightsense/carbonized'            " carbonized theme
 " Plug 'nightsense/vim-crunchbang'        " crunchbang theme
@@ -142,20 +151,29 @@ call plug#end()
 " bbye config
 nnoremap <Leader>q :Bdelete<CR>
 
+" ALE config
+let g:ale_linters = {
+      \   'javascript': ['eslint'],
+      \   'ruby': ['rubocop'],
+      \   'typescript': ['tslint'],
+      \}
+let g:ale_linters_explicit = 1 " Only run linters named in ale_linters settings.
+let g:ale_sign_column_always = 1
+
+
 " neomake config
-" autocmd! BufReadPost,BufWritePost * Neomake
-autocmd! BufWritePost * Neomake
-let g:neomake_ruby_enabled_makers = ["rubocop"]
+" call neomake#configure#automake('nrwi', 500)
+" let g:neomake_ruby_enabled_makers = ["rubocop"]
 " let g:neomake_haml_enabled_makers = ["hamllint"]
 " let g:neomake_scss_enabled_makers = ["scsslint"]
-let g:neomake_yaml_enabled_makers = ["yamllint"]
+" let g:neomake_yaml_enabled_makers = ["yamllint"]
 " let g:neomake_css_enabled_makers = ["css-lint"]
-let g:neomake_javascript_enabled_makers = ["eslint"]
+" let g:neomake_javascript_enabled_makers = ["eslint"]
 
-let g:neomake_serialize = 1
-let g:neomake_open_list = 0
-let g:neomake_list_height = 4
-let g:neomake_serialize_abort_on_error = 1
+" let g:neomake_serialize = 1
+" let g:neomake_open_list = 0
+" let g:neomake_list_height = 4
+" let g:neomake_serialize_abort_on_error = 1
 
 " vimux shortcuts
 map <leader>vp :VimuxPromptCommand<CR>
@@ -218,10 +236,8 @@ let g:fzf_history_dir = '~/.local/share/fzf-history'
 " Similarly, we can apply it to fzf#vim#grep. To use ripgrep instead of ag:
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case'.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   fzf#vim#with_preview(), <bang>0)
 
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
@@ -244,7 +260,7 @@ let g:lightline = {
     \ 'active': {
     \   'left': [ [ 'mode', 'paste' ],
     \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
-    \   'right': [ [ 'lineinfo' ],
+    \   'right': [ [ 'lineinfo', 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok' ],
     \              [ 'percent' ],
     \              [ 'filetype' ] ]
     \ },
@@ -252,6 +268,13 @@ let g:lightline = {
     \   'gitbranch': 'fugitive#head'
     \ },
   \ }
+let g:lightline.component_expand = {
+      \  'linter_checking': 'lightline#ale#checking',
+      \  'linter_infos': 'lightline#ale#infos',
+      \  'linter_warnings': 'lightline#ale#warnings',
+      \  'linter_errors': 'lightline#ale#errors',
+      \  'linter_ok': 'lightline#ale#ok',
+      \ }
 
 " Syntax Settings
 syntax enable
@@ -302,14 +325,14 @@ endfunction
 function! SetSeoul256()
   "   Range:   233 (darkest) ~ 239 (lightest)
   "   Default: 237
-  let g:seoul256_background = 235
+  let g:seoul256_background = 234
   colorscheme seoul256
 endfunction
 
 function! SetSeoul256Light()
   "   Range:   252 (darkest) ~ 256 (lightest)
   "   Default: 253
-  let g:seoul256_background = 254
+  let g:seoul256_background = 252
   colorscheme seoul256-light
 endfunction
 
@@ -340,6 +363,8 @@ endfunction
 " call SetTomorrowNight()
 call SetSeoul256()
 " colorscheme base16-bespin
+
+" colorscheme dogrun
 
 filetype plugin indent on    " required
 " Autocomplete
