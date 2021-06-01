@@ -8,7 +8,6 @@ set showcmd                   " Show us the command we're typing
 set hlsearch                  " highlight search items
 
 if has("gui_running")
-  set macligatures
   set guifont=Source\ Code\ Pro:h20
   set guioptions=
 else
@@ -23,13 +22,14 @@ else
 endif
 
 " change cursor in insert mode
-let &t_SI = "\e[6 q"
-let &t_EI = "\e[2 q"
+set guicursor=i:block
+" let &t_SI = "\e[6 q"
+" let &t_EI = "\e[2 q"
 
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
 
-" zoom a vim pane, <C-w>= to re-balance
+" zoom a vim pane, <leader>= to re-balance
 nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
 nnoremap <leader>= :wincmd =<cr>
 
@@ -117,9 +117,9 @@ Plug 'mattn/emmet-vim'                  " emmet
 " Plug 'tpope/vim-fireplace'              " clojure stuff
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'govim/govim'                     " vim-go
+" Plug 'govim/govim'                     " vim-go
 " Plug 'fatih/vim-go'
-Plug 'warbear0129/vim-qtpl'
+" Plug 'warbear0129/vim-qtpl'
 Plug 'tpope/vim-endwise'                " endwise
 Plug 'tpope/vim-fugitive'               " fugitive
 " Plug 'airblade/vim-gitgutter'           " gitgutter
@@ -134,7 +134,7 @@ Plug 'scrooloose/nerdcommenter'         " nerdcommenter
 Plug 'tpope/vim-rails'                  " rails
 Plug 'tpope/vim-repeat'                 " vim repeat
 Plug 'vim-ruby/vim-ruby'                " ruby
-Plug 'tpope/vim-salve'                  " clojure and leiningen stuff
+" Plug 'tpope/vim-salve'                  " clojure and leiningen stuff
 Plug 'tpope/vim-sensible'               " sensible vim defaults
 Plug 'ervandew/supertab'                " supertab
 Plug 'slim-template/vim-slim'           " slim template highlighting
@@ -149,6 +149,9 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'do': 'bash install.sh',
     \ }
 Plug 'vim-scripts/CSApprox'             " make gui colorshemes work in terminal
+
+Plug 'tpope/vim-obsession'
+Plug 'dhruvasagar/vim-prosession'
 
 " Themes
 Plug 'chriskempson/vim-tomorrow-theme'  " Tomorrow themes
@@ -168,7 +171,7 @@ Plug 'joshdick/onedark.vim'               " onedark
 " Tmux
 " Plug 'sjl/vitality.vim'                 " vitality, make vim and tmux play nice together
 " Plug 'tmux-plugins/vim-tmux'            " vim tmux
-" Plug 'benmills/vimux'                   " vimux, send commands to tmux pane
+Plug 'preservim/vimux'                   " vimux, send commands to tmux pane
 
 " Plug 'ctrlpvim/ctrlp.vim'               " ctrlp
 " Plug 'gregsexton/matchtag'              " matchtag, for html tag
@@ -182,9 +185,9 @@ call plug#end()
 " Required for operations modifying multiple buffers like rename.
 set hidden
 
-let g:LanguageClient_serverCommands = {
-    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-    \ }
+" let g:LanguageClient_serverCommands = {
+"     \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+"     \ }
 "    \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
 "    \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
 "    \ 'ruby': ['~/.rbenv/shims/solargraph', 'stdio'],
@@ -194,15 +197,15 @@ let g:LanguageClient_serverCommands = {
 " let g:go_code_completion_enabled = 1
 " let g:go_fmt_autosave = 1
 " let g:go_fmt_fail_silently = 1
-function DetectGoHtmlTmpl()
-    if expand('%:e') == "gohtml"
-        set filetype=html
-    endif
-endfunction
+" function DetectGoHtmlTmpl()
+"     if expand('%:e') == "gohtml"
+"         set filetype=html
+"     endif
+" endfunction
 
-augroup filetypedetect
-    au! BufRead,BufNewFile * call DetectGoHtmlTmpl()
-augroup END
+" augroup filetypedetect
+"     au! BufRead,BufNewFile * call DetectGoHtmlTmpl()
+" augroup END
 
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 " Or map each action separately

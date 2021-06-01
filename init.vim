@@ -140,6 +140,8 @@ Plug 'scrooloose/nerdtree'              " nerdtree
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-obsession'
+Plug 'dhruvasagar/vim-prosession'
 
 " Filetype handling
 Plug 'cespare/vim-toml'                 " toml
@@ -168,7 +170,7 @@ Plug 'tpope/vim-endwise'                " endwise
 Plug 'slim-template/vim-slim'           " slim template highlighting
 
 " Rust plugins
-Plug 'rust-lang/rust.vim'
+" Plug 'rust-lang/rust.vim'
 
 " Themes
 Plug 'chriskempson/vim-tomorrow-theme'  " Tomorrow themes
@@ -188,7 +190,7 @@ Plug 'joshdick/onedark.vim'               " onedark
 " Tmux
 " Plug 'sjl/vitality.vim'                 " vitality, make vim and tmux play nice together
 " Plug 'tmux-plugins/vim-tmux'            " vim tmux
-" Plug 'benmills/vimux'                   " vimux, send commands to tmux pane
+Plug 'benmills/vimux'                   " vimux, send commands to tmux pane
 
 " Plug 'ctrlpvim/ctrlp.vim'               " ctrlp
 " Plug 'gregsexton/matchtag'              " matchtag, for html tag
@@ -346,6 +348,7 @@ let NERDTreeShowBookmarks=0         "show bookmarks on startup
 let NERDTreeHighlightCursorline=1   "Highlight the selected entry in the tree
 let NERDTreeShowLineNumbers=0
 let NERDTreeMinimalUI=1
+let NERDTreeWinSize=55
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif " auto kill nerdtree if it is the only buffer
 
 " Config NERDCommenter
