@@ -72,7 +72,7 @@ Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' } " https://github.c
 " Tmux
 " Plug 'sjl/vitality.vim'                 " vitality, make vim and tmux play nice together
 " Plug 'tmux-plugins/vim-tmux'            " vim tmux
-Plug 'benmills/vimux'                   " vimux, send commands to tmux pane
+Plug 'preservim/vimux'                   " vimux, send commands to tmux pane
 
 " Plugins to reconsider later
 "
