@@ -47,25 +47,26 @@ for _, lsp in ipairs(servers) do
   }
 end
 
--- local capabilities = vim.lsp.protocol.make_client_capabilities()
--- capabilities.textDocument.completion.completionItem.snippetSupport = true
+-- go is special
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 
--- nvim_lsp.gopls.setup {
---   cmd = {"gopls", "serve"},
---   on_attach = on_attach,
---   flags = {
---     debounce_text_changes = 150,
---   },
---   capabilities = capabilities,
---   settings = {
---     gopls = {
---         experimentalPostfixCompletions = true,
---         analyses = {
---           unusedparams = true,
---           shadow = true,
---        },
---        staticcheck = true,
---       },
---   },
--- }
+nvim_lsp.gopls.setup {
+  cmd = {"gopls", "serve"},
+  on_attach = on_attach,
+  flags = {
+    debounce_text_changes = 150,
+  },
+  capabilities = capabilities,
+  settings = {
+    gopls = {
+        experimentalPostfixCompletions = true,
+        analyses = {
+          unusedparams = true,
+          shadow = true,
+       },
+       staticcheck = true,
+      },
+  },
+}
 

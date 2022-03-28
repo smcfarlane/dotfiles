@@ -3,12 +3,11 @@ set nocompatible              " be improved, required filetype off, required
 set clipboard=unnamed         " configure terminal vim to use mac clipboard
 let mapleader="\<space>"      " remap leader to <space> bar
 let maplocalleader="\\"
-set backspace=2               " make backspace work like most other apps
-set laststatus=2              " always display the status line
 set showcmd                   " Show us the command we're typing
 set hlsearch                  " highlight search items
+set encoding=UTF-8
 
-set guifont=Source\ Code\ Pro
+set guifont=Menlo
 
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
@@ -22,18 +21,18 @@ set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.yardoc/*,*.exe,*.so,*.dat
 
 " set relative line numbering hybrid number mode
 set number
-" set relativenumber
+set relativenumber
 " Auto-toggle line numbers
 " relative line numbers for normal mode
 " normal line numbers for insert mode
-" augroup numbertoggle
-  " autocmd!
-  " autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-  " autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-" augroup END
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
 
-" Give more space for displaying messages.
-set cmdheight=2
+" hight for messages
+set cmdheight=1
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
@@ -77,6 +76,8 @@ map <leader>s :setlocal spell! spelllang=en_us<CR>
 " search and replace shortcut
 nnoremap <leader>f :%s//gI<Left><Left><Left>
 
+set autowrite
+
 source ~/.config/nvim/vim_script/plug_config.vim
 
 " Language server configs
@@ -91,3 +92,7 @@ source ~/.config/nvim/vim_script/syntax.vim
 
 call SetColors()
 
+" Lightline Config
+let g:lightline = {
+    \ 'colorscheme': 'wombat',
+  \ }

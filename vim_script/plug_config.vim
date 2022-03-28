@@ -8,7 +8,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'ntpeters/vim-better-whitespace'   " better-whitespace
 Plug 'jeetsukumaran/vim-buffergator'    " buffergator
 Plug 'raimondi/delimitmate'             " delimitmate (automatic bracket closing)
-Plug 'yggdroot/indentline'              " indentline
+" Plug 'yggdroot/indentline'              " indentline
 Plug 'scrooloose/nerdcommenter'         " nerdcommenter
 Plug 'tpope/vim-repeat'                 " vim repeat
 Plug 'tpope/vim-sensible'               " sensible vim defaults
@@ -27,11 +27,11 @@ Plug 'itchyny/lightline.vim'            " lightline
 Plug 'scrooloose/nerdtree'              " nerdtree
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy finder
 Plug 'junegunn/fzf.vim'                 " Fuzzy finder
-Plug 'tpope/vim-obsession'              " Sesson management required by prosession
-Plug 'dhruvasagar/vim-prosession'       " Sesson management
+" Plug 'tpope/vim-obsession'              " Sesson management required by prosession
+" Plug 'dhruvasagar/vim-prosession'       " Sesson management
 
 " Filetype handling
-Plug 'cespare/vim-toml'                 " toml
+" Plug 'cespare/vim-toml'                 " toml
 Plug 'ekalinin/Dockerfile.vim'          " highlighting for dockerfiles
 
 " HTML and CSS plugins
@@ -49,25 +49,29 @@ Plug 'leafgarland/typescript-vim'       " typescript
 Plug 'tpope/vim-rails'                  " rails
 Plug 'vim-ruby/vim-ruby'                " ruby
 Plug 'tpope/vim-endwise'                " endwise auto adds 'end' to ruby blocks
-Plug 'slim-template/vim-slim'           " slim template highlighting
+" Plug 'slim-template/vim-slim'           " slim template highlighting
 
 " Rust plugins
 " Plug 'rust-lang/rust.vim'
 
+" Golang plugins
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+
 " Themes
-" Plug 'chriskempson/vim-tomorrow-theme'  " Tomorrow themes
-Plug 'altercation/vim-colors-solarized' " colors-solarized theme
+Plug 'chriskempson/base16-vim'          " Base16 themes
 Plug 'junegunn/seoul256.vim'            " seoul theme
 Plug 'lifepillar/vim-solarized8'
-" Plug 'wadackel/vim-dogrun'
-Plug 'chriskempson/base16-vim'          " Base16 themes
+Plug 'morhetz/gruvbox'
+Plug 'shinchu/lightline-gruvbox.vim'
+" Plug 'jpo/vim-railscasts-theme'           " https://github.com/jpo/vim-railscasts-theme
+Plug 'wadackel/vim-dogrun'
 " Plug 'nightsense/vim-crunchbang'          " crunchbang theme
 " Plug 'lucasprag/simpleblack'              " https://github.com/lucasprag/simpleblack
 " Plug 'semibran/vim-colors-synthetic'      " https://github.com/semibran/vim-colors-synthetic
-Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' } " https://github.com/challenger-deep-theme/vim
+" Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' } " https://github.com/challenger-deep-theme/vim
 " Plug 'rafalbromirski/vim-aurora'          " https://github.com/rafalbromirski/vim-aurora
-" Plug 'nanotech/jellybeans.vim'            " https://github.com/nanotech/jellybeans.vim
-" Plug 'joshdick/onedark.vim'               " onedark
+Plug 'nanotech/jellybeans.vim'            " https://github.com/nanotech/jellybeans.vim
+Plug 'joshdick/onedark.vim'               " onedark
 
 " Tmux
 " Plug 'sjl/vitality.vim'                 " vitality, make vim and tmux play nice together

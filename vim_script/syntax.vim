@@ -1,9 +1,5 @@
 " Syntax Settings
 
-if has('nvim') || has('termguicolors')
-  set termguicolors
-endif
-
 " change cursor in insert mode
 " insert mode - line
 let &t_SI .= "\<Esc>[5 q"
@@ -17,7 +13,7 @@ let base16colorspace=256
 set termguicolors
 
 " For when slim highlighting doesn't work
-autocmd BufNewFile,BufRead *.slim set ft=slim
+" autocmd BufNewFile,BufRead *.slim set ft=slim
 
 function! SetSeoul256()
   "   Range:   233 (darkest) ~ 239 (lightest)
@@ -34,6 +30,14 @@ function! SetSeoul256Light()
 endfunction
 
 function! SetColors()
+  " set background=light
+  " autocmd vimenter * ++nested colorscheme solarized8_high
+  " colorscheme base16-tomorrow-night
+  " colorscheme gruvbox
   " colorscheme challenger_deep
-  colorscheme base16-tomorrow-night
+  " colorscheme railscasts
+  " colorscheme base16-tomorrow-night
+  " call SetSeoul256()
+  " colorscheme base16-atelier-savanna-light
+  colorscheme base16-chalk
 endfunction

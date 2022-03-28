@@ -27,7 +27,19 @@ let g:user_emmet_leader_key='<C-e>'
 " Indent guide configuration
 let g:indentLine_char = '|'
 
-" Lightline Config
-let g:lightline = {
-    \ 'colorscheme': 'wombat',
-  \ }
+
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+let g:go_fmt_command = "goimports"
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_operators = 1
+
+" easy run build
+autocmd FileType go nmap <leader>b  <Plug>(go-build)
+" easy run
+autocmd FileType go nmap <leader>r  <Plug>(go-run)
+" easy run tests
+autocmd FileType go nmap <leader>t  <Plug>(go-test)
+autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=2 shiftwidth=2
