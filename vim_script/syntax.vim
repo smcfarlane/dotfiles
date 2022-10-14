@@ -1,13 +1,5 @@
 " Syntax Settings
 
-" change cursor in insert mode
-" insert mode - line
-let &t_SI .= "\<Esc>[5 q"
-"replace mode - underline
-let &t_SR .= "\<Esc>[4 q"
-"common - block
-let &t_EI .= "\<Esc>[3 q"
-
 syntax enable
 let base16colorspace=256
 set termguicolors
@@ -39,5 +31,8 @@ function! SetColors()
   " colorscheme base16-tomorrow-night
   " call SetSeoul256()
   " colorscheme base16-atelier-savanna-light
-  colorscheme base16-chalk
+  " colorscheme base16-chalk
+  " colorscheme base16-atelier-forest
 endfunction
+
+colorscheme base16-horizon-dark

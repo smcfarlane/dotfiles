@@ -27,8 +27,8 @@ Plug 'itchyny/lightline.vim'            " lightline
 Plug 'scrooloose/nerdtree'              " nerdtree
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy finder
 Plug 'junegunn/fzf.vim'                 " Fuzzy finder
-" Plug 'tpope/vim-obsession'              " Sesson management required by prosession
-" Plug 'dhruvasagar/vim-prosession'       " Sesson management
+Plug 'tpope/vim-obsession'              " Sesson management required by prosession
+Plug 'dhruvasagar/vim-prosession'       " Sesson management
 
 " Filetype handling
 " Plug 'cespare/vim-toml'                 " toml
@@ -55,7 +55,7 @@ Plug 'tpope/vim-endwise'                " endwise auto adds 'end' to ruby blocks
 " Plug 'rust-lang/rust.vim'
 
 " Golang plugins
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+" Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 
 " Themes
 Plug 'chriskempson/base16-vim'          " Base16 themes

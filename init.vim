@@ -85,14 +85,14 @@ luafile ~/.config/nvim/lua/lsp-config.lua
 luafile ~/.config/nvim/lua/compe-config.lua
 
 source ~/.config/nvim/vim_script/plugin_config.vim
-source ~/.config/nvim/vim_script/go_lang.vim
+" source ~/.config/nvim/vim_script/go_lang.vim
 source ~/.config/nvim/vim_script/nerd_plugins_config.vim
 source ~/.config/nvim/vim_script/fzf_config.vim
 source ~/.config/nvim/vim_script/syntax.vim
 
-call SetColors()
+" call SetColors()
 
 " Lightline Config
 let g:lightline = {
     \ 'colorscheme': 'wombat',
-  \ }
+    \ }
