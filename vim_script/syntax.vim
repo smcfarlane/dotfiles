@@ -35,4 +35,4 @@ function! SetColors()
   " colorscheme base16-atelier-forest
 endfunction
 
-colorscheme base16-horizon-dark
+colorscheme base16-darkmoss

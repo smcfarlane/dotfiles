@@ -23,8 +23,11 @@ Plug 'tpope/vim-fugitive'               " fugitive
 " neovim now has lsp features built in
 Plug 'neovim/nvim-lspconfig'            " language server protocol - configured in lsp-config.lua
 Plug 'hrsh7th/nvim-compe'               " Tab complete - configured in compe-config.lua
-Plug 'itchyny/lightline.vim'            " lightline
-Plug 'scrooloose/nerdtree'              " nerdtree
+Plug 'nvim-lualine/lualine.nvim'
+" Plug 'itchyny/lightline.vim'            " lightline
+" Plug 'scrooloose/nerdtree'              " nerdtree
+Plug 'nvim-tree/nvim-web-devicons' " optional, for file icons
+Plug 'nvim-tree/nvim-tree.lua'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy finder
 Plug 'junegunn/fzf.vim'                 " Fuzzy finder
 Plug 'tpope/vim-obsession'              " Sesson management required by prosession
@@ -58,7 +61,8 @@ Plug 'tpope/vim-endwise'                " endwise auto adds 'end' to ruby blocks
 " Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 
 " Themes
-Plug 'chriskempson/base16-vim'          " Base16 themes
+" Plug 'chriskempson/base16-vim'          " Base16 themes
+Plug 'RRethy/nvim-base16'
 Plug 'junegunn/seoul256.vim'            " seoul theme
 Plug 'lifepillar/vim-solarized8'
 Plug 'morhetz/gruvbox'
