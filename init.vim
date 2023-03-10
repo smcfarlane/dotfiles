@@ -92,3 +92,6 @@ source ~/.config/nvim/vim_script/nerd_plugins_config.vim
 source ~/.config/nvim/vim_script/fzf_config.vim
 source ~/.config/nvim/vim_script/syntax.vim
 
+lua << EOF
+require("bufferline").setup{}
+EOF

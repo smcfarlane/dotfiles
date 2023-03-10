@@ -6,7 +6,7 @@ call plug#begin('~/.config/nvim/plugged')
 
 " Make things nice plugings
 Plug 'ntpeters/vim-better-whitespace'   " better-whitespace
-Plug 'jeetsukumaran/vim-buffergator'    " buffergator
+" Plug 'jeetsukumaran/vim-buffergator'    " buffergator
 Plug 'raimondi/delimitmate'             " delimitmate (automatic bracket closing)
 Plug 'scrooloose/nerdcommenter'         " nerdcommenter
 Plug 'tpope/vim-repeat'                 " vim repeat
@@ -23,6 +23,7 @@ Plug 'neovim/nvim-lspconfig'            " language server protocol - configured 
 Plug 'hrsh7th/nvim-compe'               " Tab complete - configured in compe-config.lua
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'nvim-tree/nvim-web-devicons' " optional, for file icons
+Plug 'akinsho/bufferline.nvim', { 'tag': 'v3.*' }
 Plug 'nvim-tree/nvim-tree.lua'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
