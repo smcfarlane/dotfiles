@@ -84,6 +84,7 @@ luafile ~/.config/nvim/lua/nvim_tree_config.lua
 luafile ~/.config/nvim/lua/lsp-config.lua
 luafile ~/.config/nvim/lua/compe-config.lua
 luafile ~/.config/nvim/lua/lualine-config.lua
+luafile ~/.config/nvim/lua/telescope_config.lua
 
 source ~/.config/nvim/vim_script/plugin_config.vim
 " source ~/.config/nvim/vim_script/go_lang.vim

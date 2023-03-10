@@ -8,13 +8,11 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'ntpeters/vim-better-whitespace'   " better-whitespace
 Plug 'jeetsukumaran/vim-buffergator'    " buffergator
 Plug 'raimondi/delimitmate'             " delimitmate (automatic bracket closing)
-" Plug 'yggdroot/indentline'              " indentline
 Plug 'scrooloose/nerdcommenter'         " nerdcommenter
 Plug 'tpope/vim-repeat'                 " vim repeat
 Plug 'tpope/vim-sensible'               " sensible vim defaults
 Plug 'tpope/vim-surround'               " surround
 Plug 'machakann/vim-highlightedyank'
-" Plug 'tpope/vim-dispatch'               " async shell commands
 
 " git stuff
 Plug 'tpope/vim-fugitive'               " fugitive
@@ -24,12 +22,10 @@ Plug 'tpope/vim-fugitive'               " fugitive
 Plug 'neovim/nvim-lspconfig'            " language server protocol - configured in lsp-config.lua
 Plug 'hrsh7th/nvim-compe'               " Tab complete - configured in compe-config.lua
 Plug 'nvim-lualine/lualine.nvim'
-" Plug 'itchyny/lightline.vim'            " lightline
-" Plug 'scrooloose/nerdtree'              " nerdtree
 Plug 'nvim-tree/nvim-web-devicons' " optional, for file icons
 Plug 'nvim-tree/nvim-tree.lua'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy finder
-Plug 'junegunn/fzf.vim'                 " Fuzzy finder
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
 Plug 'tpope/vim-obsession'              " Sesson management required by prosession
 Plug 'dhruvasagar/vim-prosession'       " Sesson management
 
@@ -39,7 +35,6 @@ Plug 'ekalinin/Dockerfile.vim'          " highlighting for dockerfiles
 
 " HTML and CSS plugins
 Plug 'mattn/emmet-vim'                  " emmet
-Plug 'hail2u/vim-css3-syntax'           " css3 syntax
 Plug 'alvan/vim-closetag'               " close html tags
 
 " JS and TS plugins
@@ -66,29 +61,22 @@ Plug 'RRethy/nvim-base16'
 Plug 'junegunn/seoul256.vim'            " seoul theme
 Plug 'lifepillar/vim-solarized8'
 Plug 'morhetz/gruvbox'
-Plug 'shinchu/lightline-gruvbox.vim'
-" Plug 'jpo/vim-railscasts-theme'           " https://github.com/jpo/vim-railscasts-theme
 Plug 'wadackel/vim-dogrun'
+Plug 'nanotech/jellybeans.vim'            " https://github.com/nanotech/jellybeans.vim
+Plug 'joshdick/onedark.vim'               " onedark
+" Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' } " https://github.com/challenger-deep-theme/vim
 " Plug 'nightsense/vim-crunchbang'          " crunchbang theme
 " Plug 'lucasprag/simpleblack'              " https://github.com/lucasprag/simpleblack
 " Plug 'semibran/vim-colors-synthetic'      " https://github.com/semibran/vim-colors-synthetic
-" Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' } " https://github.com/challenger-deep-theme/vim
 " Plug 'rafalbromirski/vim-aurora'          " https://github.com/rafalbromirski/vim-aurora
-Plug 'nanotech/jellybeans.vim'            " https://github.com/nanotech/jellybeans.vim
-Plug 'joshdick/onedark.vim'               " onedark
 
 " Tmux
-" Plug 'sjl/vitality.vim'                 " vitality, make vim and tmux play nice together
 " Plug 'tmux-plugins/vim-tmux'            " vim tmux
 Plug 'preservim/vimux'                   " vimux, send commands to tmux pane
 
 " Plugins to reconsider later
 "
-" Plug 'ctrlpvim/ctrlp.vim'               " ctrlp
-" Plug 'gregsexton/matchtag'              " matchtag, for html tag
-" Plug 'flazz/vim-colorschemes'           " colorschemes
 " Plug 'tpope/vim-unimpaired'             " unimpaired
-" Plug 'sjl/gundo.vim'                    " gundo
 
 call plug#end()
 
