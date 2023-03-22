@@ -21,18 +21,15 @@ function! SetSeoul256Light()
   colorscheme seoul256-light
 endfunction
 
-function! SetColors()
-  " set background=light
-  " autocmd vimenter * ++nested colorscheme solarized8_high
-  " colorscheme base16-tomorrow-night
-  " colorscheme gruvbox
-  " colorscheme challenger_deep
-  " colorscheme railscasts
-  " colorscheme base16-tomorrow-night
-  " call SetSeoul256()
-  " colorscheme base16-atelier-savanna-light
-  " colorscheme base16-chalk
-  " colorscheme base16-atelier-forest
-endfunction
-
-colorscheme base16-darkmoss
+set background=dark
+colorscheme seoul256
+" colorscheme solarized8_flat
+" autocmd vimenter * ++nested colorscheme solarized8_high
+" colorscheme gruvbox
+" colorscheme challenger_deep
+" call SetSeoul256()
+" colorscheme base16-tomorrow-night
+" colorscheme base16-atelier-savanna-light
+" colorscheme base16-chalk
+" colorscheme base16-atelier-forest
+" colorscheme base16-darkmoss

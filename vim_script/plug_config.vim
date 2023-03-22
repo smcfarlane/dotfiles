@@ -23,7 +23,8 @@ Plug 'neovim/nvim-lspconfig'            " language server protocol - configured 
 Plug 'hrsh7th/nvim-compe'               " Tab complete - configured in compe-config.lua
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'nvim-tree/nvim-web-devicons' " optional, for file icons
-Plug 'akinsho/bufferline.nvim', { 'tag': 'v3.*' }
+" should try https://github.com/j-morano/buffer_manager.nvim
+Plug 'j-morano/buffer_manager.nvim'
 Plug 'nvim-tree/nvim-tree.lua'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }

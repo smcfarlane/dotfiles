@@ -25,11 +25,11 @@ set relativenumber
 " Auto-toggle line numbers
 " relative line numbers for normal mode
 " normal line numbers for insert mode
-augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-augroup END
+" augroup numbertoggle
+"   autocmd!
+"   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+"   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+" augroup END
 
 " hight for messages
 set cmdheight=1
@@ -84,6 +84,7 @@ luafile ~/.config/nvim/lua/nvim_tree_config.lua
 luafile ~/.config/nvim/lua/lsp-config.lua
 luafile ~/.config/nvim/lua/compe-config.lua
 luafile ~/.config/nvim/lua/lualine-config.lua
+luafile ~/.config/nvim/lua/buffer_manager_config.lua
 luafile ~/.config/nvim/lua/telescope_config.lua
 
 source ~/.config/nvim/vim_script/plugin_config.vim
@@ -92,6 +93,3 @@ source ~/.config/nvim/vim_script/nerd_plugins_config.vim
 source ~/.config/nvim/vim_script/fzf_config.vim
 source ~/.config/nvim/vim_script/syntax.vim
 
-lua << EOF
-require("bufferline").setup{}
-EOF
