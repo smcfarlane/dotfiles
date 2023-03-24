@@ -22,10 +22,10 @@ function! SetSeoul256Light()
 endfunction
 
 set background=dark
-colorscheme seoul256
+" colorscheme seoul256
 " colorscheme solarized8_flat
 " autocmd vimenter * ++nested colorscheme solarized8_high
-" colorscheme gruvbox
+colorscheme gruvbox
 " colorscheme challenger_deep
 " call SetSeoul256()
 " colorscheme base16-tomorrow-night

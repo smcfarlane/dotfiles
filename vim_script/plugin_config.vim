@@ -27,32 +27,32 @@ let g:user_emmet_leader_key='<C-e>'
 " Indent guide configuration
 let g:indentLine_char = '|'
 
-nnoremap <silent><leader>1 <Cmd>BufferLineGoToBuffer 1<CR>
-nnoremap <silent><leader>2 <Cmd>BufferLineGoToBuffer 2<CR>
-nnoremap <silent><leader>3 <Cmd>BufferLineGoToBuffer 3<CR>
-nnoremap <silent><leader>4 <Cmd>BufferLineGoToBuffer 4<CR>
-nnoremap <silent><leader>5 <Cmd>BufferLineGoToBuffer 5<CR>
-nnoremap <silent><leader>6 <Cmd>BufferLineGoToBuffer 6<CR>
-nnoremap <silent><leader>7 <Cmd>BufferLineGoToBuffer 7<CR>
-nnoremap <silent><leader>8 <Cmd>BufferLineGoToBuffer 8<CR>
-nnoremap <silent><leader>9 <Cmd>BufferLineGoToBuffer 9<CR>
-nnoremap <silent><leader>$ <Cmd>BufferLineGoToBuffer -1<CR>
+" nnoremap <silent><leader>1 <Cmd>BufferLineGoToBuffer 1<CR>
+" nnoremap <silent><leader>2 <Cmd>BufferLineGoToBuffer 2<CR>
+" nnoremap <silent><leader>3 <Cmd>BufferLineGoToBuffer 3<CR>
+" nnoremap <silent><leader>4 <Cmd>BufferLineGoToBuffer 4<CR>
+" nnoremap <silent><leader>5 <Cmd>BufferLineGoToBuffer 5<CR>
+" nnoremap <silent><leader>6 <Cmd>BufferLineGoToBuffer 6<CR>
+" nnoremap <silent><leader>7 <Cmd>BufferLineGoToBuffer 7<CR>
+" nnoremap <silent><leader>8 <Cmd>BufferLineGoToBuffer 8<CR>
+" nnoremap <silent><leader>9 <Cmd>BufferLineGoToBuffer 9<CR>
+" nnoremap <silent><leader>$ <Cmd>BufferLineGoToBuffer -1<CR>
 
-" These commands will navigate through buffers in order
-" regardless of which mode you are using  e.g. if you change
-" the order of buffers :bnext and :bprevious will not respect the custom ordering
-nnoremap <silent><leader>n :BufferLineCycleNext<CR>
-nnoremap <silent><leader>p :BufferLineCyclePrev<CR>
-" These commands will move the current buffer backwards or forwards in the bufferline
-nnoremap <silent><C-b>n :BufferLineMoveNext<CR>
-nnoremap <silent><C-b>p :BufferLineMovePrev<CR>
-" These commands will move the current buffer to the first or the last position in the bufferline
-nnoremap <silent><C-b>1 :lua require'bufferline'.move_to(1)<CR>
-nnoremap <silent><C-b>0 :lua require'bufferline'.move_to(-1)<CR>
-" These commands will sort buffers by directory, language, or a custom criteria
-nnoremap <silent><leader>be :BufferLineSortByExtension<CR>
-nnoremap <silent><leader>bd :BufferLineSortByDirectory<CR>
-nnoremap <silent><leader>ss :lua require'bufferline'.sort_buffers_by(function (buf_a, buf_b) return buf_a.id < buf_b.id end)<CR>
+" " These commands will navigate through buffers in order
+" " regardless of which mode you are using  e.g. if you change
+" " the order of buffers :bnext and :bprevious will not respect the custom ordering
+" nnoremap <silent><leader>n :BufferLineCycleNext<CR>
+" nnoremap <silent><leader>p :BufferLineCyclePrev<CR>
+" " These commands will move the current buffer backwards or forwards in the bufferline
+" nnoremap <silent><C-b>n :BufferLineMoveNext<CR>
+" nnoremap <silent><C-b>p :BufferLineMovePrev<CR>
+" " These commands will move the current buffer to the first or the last position in the bufferline
+" nnoremap <silent><C-b>1 :lua require'bufferline'.move_to(1)<CR>
+" nnoremap <silent><C-b>0 :lua require'bufferline'.move_to(-1)<CR>
+" " These commands will sort buffers by directory, language, or a custom criteria
+" nnoremap <silent><leader>be :BufferLineSortByExtension<CR>
+" nnoremap <silent><leader>bd :BufferLineSortByDirectory<CR>
+" nnoremap <silent><leader>ss :lua require'bufferline'.sort_buffers_by(function (buf_a, buf_b) return buf_a.id < buf_b.id end)<CR>
 
 
 
