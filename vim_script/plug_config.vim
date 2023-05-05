@@ -17,6 +17,8 @@ Plug 'machakann/vim-highlightedyank'
 " git stuff
 Plug 'tpope/vim-fugitive'               " fugitive
 
+" lua utils
+Plug 'nvim-lua/plenary.nvim'
 " IDE features
 " neovim now has lsp features built in
 Plug 'neovim/nvim-lspconfig'            " language server protocol - configured in lsp-config.lua
@@ -26,10 +28,13 @@ Plug 'nvim-tree/nvim-web-devicons' " optional, for file icons
 " should try https://github.com/j-morano/buffer_manager.nvim
 Plug 'j-morano/buffer_manager.nvim'
 Plug 'nvim-tree/nvim-tree.lua'
-Plug 'nvim-lua/plenary.nvim'
+Plug 'ThePrimeagen/harpoon'
 Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
-Plug 'tpope/vim-obsession'              " Sesson management required by prosession
-Plug 'dhruvasagar/vim-prosession'       " Sesson management
+" Plug 'tpope/vim-obsession'              " Sesson management required by prosession
+" Plug 'dhruvasagar/vim-prosession'       " Sesson management
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter-context'
+Plug 'github/copilot.vim'
 
 " Filetype handling
 " Plug 'cespare/vim-toml'                 " toml
@@ -75,6 +80,7 @@ Plug 'joshdick/onedark.vim'               " onedark
 " Tmux
 " Plug 'tmux-plugins/vim-tmux'            " vim tmux
 Plug 'preservim/vimux'                   " vimux, send commands to tmux pane
+Plug 'christoomey/vim-tmux-navigator'
 
 " Plugins to reconsider later
 "
