@@ -27,6 +27,16 @@ local plugins = {
       },
     },
   },
+  {
+    "numToStr/Comment.nvim",
+    lazy = false,
+    init = function()
+      require("core.utils").load_mappings "comment"
+    end,
+    config = function()
+      require("Comment").setup()
+    end,
+  },
   -- custom plugins
   { "tpope/vim-repeat", lazy = false },
   { "tpope/vim-sensible", lazy = false },
