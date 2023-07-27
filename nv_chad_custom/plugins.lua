@@ -42,6 +42,7 @@ local plugins = {
   { "tpope/vim-sensible", lazy = false },
   { "tpope/vim-surround", lazy = false },
   { "machakann/vim-highlightedyank", lazy = false },
+  { "ntpeters/vim-better-whitespace" },
   { "vim-ruby/vim-ruby" },
   { "ekalinin/Dockerfile.vim" },
   {
