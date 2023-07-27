@@ -20,7 +20,7 @@ local plugins = {
       ensure_installed = {
         "lua-language-server",
         "html-lsp",
-        "css-languageserver",
+        "css-lsp",
         "typescript-language-server",
         "stylua",
         "solargraph"
@@ -42,6 +42,7 @@ local plugins = {
   { "tpope/vim-sensible", lazy = false },
   { "tpope/vim-surround", lazy = false },
   { "machakann/vim-highlightedyank", lazy = false },
+  { "vim-ruby/vim-ruby" },
   { "ekalinin/Dockerfile.vim" },
   {
     "ThePrimeagen/harpoon",
