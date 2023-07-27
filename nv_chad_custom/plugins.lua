@@ -43,7 +43,13 @@ local plugins = {
   { "tpope/vim-surround", lazy = false },
   { "machakann/vim-highlightedyank", lazy = false },
   { "ekalinin/Dockerfile.vim" },
-  { "ThePrimeagen/harpoon" },
+  {
+    "ThePrimeagen/harpoon",
+    lazy = false,
+    config = function()
+      require("core.utils").load_mappings "harpoon"
+    end,
+  },
   {
     "alexghergh/nvim-tmux-navigation",
     config = function()
@@ -52,10 +58,33 @@ local plugins = {
       nvim_tmux_nav.setup {
         disable_when_zoomed = true -- defaults to false
       }
+      require("core.utils").load_mappings "tmux"
     end,
     lazy = false
   },
-  { "github/copilot.vim", lazy = false }
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require("copilot").setup({
+        suggestion = {
+          enabled = true,
+          auto_trigger = true,
+          debounce = 75,
+          keymap = {
+            accept = "<C-a>", -- <M-l> 
+            accept_word = false,
+            accept_line = false,
+            next = "‘", -- <M-]>
+            prev = "“", -- <M-[>
+            dismiss = "∂", -- <M-d>
+          },
+        },
+      })
+    end,
+  },
+  { "towolf/vim-helm" }
 }
 
 return plugins
