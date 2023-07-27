@@ -20,7 +20,7 @@ local plugins = {
       ensure_installed = {
         "lua-language-server",
         "html-lsp",
-        "css-languageserver",
+        "css-lsp",
         "typescript-language-server",
         "stylua",
         "solargraph"
@@ -42,6 +42,7 @@ local plugins = {
   { "tpope/vim-sensible", lazy = false },
   { "tpope/vim-surround", lazy = false },
   { "machakann/vim-highlightedyank", lazy = false },
+  { "vim-ruby/vim-ruby" },
   { "ekalinin/Dockerfile.vim" },
   { "ThePrimeagen/harpoon" },
   {
@@ -54,6 +55,20 @@ local plugins = {
       }
     end,
     lazy = false
+  },
+  {
+    "nvim-neotest/neotest",
+    lazy = true,
+    dependencies = {
+      "olimorris/neotest-rspec",
+    },
+    config = function()
+      require("neotest").setup({
+        adapters = {
+          require("neotest-rspec")
+        },
+      })
+    end
   },
   { "github/copilot.vim", lazy = false }
 }
