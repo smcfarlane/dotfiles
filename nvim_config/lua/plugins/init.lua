@@ -15,6 +15,7 @@ return {
   { "ntpeters/vim-better-whitespace" },
   { "vim-ruby/vim-ruby" },
   { "tpope/vim-rails" },
+  { "tpope/vim-haml" },
   { "ekalinin/Dockerfile.vim" },
   { "towolf/vim-helm" },
   {

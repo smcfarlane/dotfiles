@@ -1,8 +1,8 @@
 ---@type ChadrcConfig 
 local M = {}
 M.ui = {
-  theme_toggle = { "everblush", "everblush_light" },
-  theme = 'everblush'
+  theme_toggle = { "chadracula", "chadracula_light" },
+  theme = 'chadracula'
 }
 M.mappings = require "custom.mappings"
 M.plugins = "custom.plugins"

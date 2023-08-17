@@ -4,6 +4,10 @@ local g = vim.g
 opt.laststatus = 3 -- global statusline
 opt.showmode = false
 
+opt.encoding = "utf-8"
+opt.spelllang = 'en_us'
+opt.spell = true
+
 opt.clipboard = "unnamedplus"
 opt.cursorline = true
 
@@ -21,6 +25,7 @@ opt.mouse = "a"
 
 -- Numbers
 opt.number = true
+opt.relativenumber = true
 opt.numberwidth = 2
 opt.ruler = false
 
