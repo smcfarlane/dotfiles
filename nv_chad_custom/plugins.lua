@@ -42,8 +42,9 @@ local plugins = {
   { "tpope/vim-sensible", lazy = false },
   { "tpope/vim-surround", lazy = false },
   { "machakann/vim-highlightedyank", lazy = false },
-  { "ntpeters/vim-better-whitespace" },
-  { "vim-ruby/vim-ruby" },
+  { "ntpeters/vim-better-whitespace", lazy = false },
+  { "vim-ruby/vim-ruby", lazy = false },
+  { "tpope/vim-haml", lazy = false },
   { "ekalinin/Dockerfile.vim" },
   {
     "ThePrimeagen/harpoon",
