@@ -3,7 +3,7 @@ local plugins = {
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
-      ensure_installed = {"lua", "vim", "html", "css", "bash", "ruby", "javascript", "json", "yaml"},
+      ensure_installed = {"lua", "vim", "html", "css", "bash", "ruby", "javascript", "json", "yaml", "elixir", "heex", "eex"},
     },
   },
   -- In order to modify the `lspconfig` configuration:
