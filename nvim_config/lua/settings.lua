@@ -1,6 +1,12 @@
 local opt = vim.opt
 local g = vim.g
 
+-- recommendation from nvim-tree
+-- disable netrw at the very start of your init.lua
+g.loaded_netrw = 1
+g.loaded_netrwPlugin = 1
+
+opt.termguicolors = true
 opt.laststatus = 3 -- global statusline
 opt.showmode = false
 
@@ -38,6 +44,7 @@ opt.splitright = true
 opt.termguicolors = true
 opt.timeoutlen = 400
 opt.undofile = true
+opt.showbreak = "  ↳"
 
 -- interval for writing swap file to disk, also used by gitsigns
 opt.updatetime = 250
