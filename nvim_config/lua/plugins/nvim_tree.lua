@@ -8,7 +8,7 @@ return {
   config = function()
     require("nvim-tree").setup {
       filters = {
-        dotfiles = true,
+        dotfiles = false,
       },
       disable_netrw = true,
       hijack_netrw = true,

@@ -12,3 +12,7 @@ lua
 statusline
 utf
 unnamedplus
+searchkick
+searchable
+reindexing
+reindexes
