@@ -2,6 +2,12 @@ return {
   "ThePrimeagen/harpoon",
   lazy = false,
   config = function()
+    require("harpoon").setup({
+      menu = {
+        width = 90,
+        height = 20,
+      },
+    })
     local map = require("utils").map
     map("n", "<leader>ha", "<cmd>lua require('harpoon.ui').add_file()<CR>", { desc = "Harpoon add file" })
     map("n", "<leader>hm", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>", { desc = "Harpoon toggle menu" })

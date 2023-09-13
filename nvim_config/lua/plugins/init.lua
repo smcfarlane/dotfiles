@@ -13,7 +13,7 @@ return {
   { "machakann/vim-highlightedyank", lazy = false },
   { 'tpope/vim-fugitive' },
   { "ntpeters/vim-better-whitespace" },
-  { "vim-ruby/vim-ruby" },
+  -- { "vim-ruby/vim-ruby" },
   { "tpope/vim-rails" },
   { "tpope/vim-haml" },
   { "ekalinin/Dockerfile.vim" },
@@ -53,5 +53,18 @@ return {
       map('n', '<leader>]b', ':BufferLineMoveNext<CR>', { desc = 'move buffer next' })
       map('n', '<leader>[b', ':BufferLineMovePrev<CR>', { desc = 'move buffer previous' })
     end
+  },
+  {
+  "ray-x/go.nvim",
+    dependencies = {  -- optional packages
+      "ray-x/guihua.lua",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    config = function()
+      require("go").setup()
+    end,
+    event = {"CmdlineEnter"},
+    ft = {"go", 'gomod'},
+    build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
   }
 }

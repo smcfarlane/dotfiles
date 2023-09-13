@@ -1,0 +1,42 @@
+-- run go imports on save
+-- vim.api.nvim_create_autocmd('BufWritePre', {
+--   pattern = '*.go',
+--   callback = function()
+--     vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })
+--   end
+-- })
+
+-- vim.api.nvim_create_autocmd(
+--   { 'BufRead', 'BufNewFile' },
+--   { pattern = '*.go', command = 'set filetype=go' }
+-- )
+--
+-- vim.api.nvim_create_autocmd(
+--   { 'BufRead', 'BufNewFile' },
+--   { pattern = '*.gotext', command = 'set filetype=gotexttmpl' }
+-- )
+--
+-- vim.api.nvim_create_autocmd(
+--   { 'BufRead', 'BufNewFile' },
+--   { pattern = '*.gohtml', command = 'set filetype=gohtmltmpl' }
+-- )
+--
+-- vim.api.nvim_create_autocmd(
+--   { 'BufRead', 'BufNewFile' },
+--   { pattern = 'go.sum', command = 'set filetype=gosum' }
+-- )
+--
+-- vim.api.nvim_create_autocmd(
+--   { 'BufRead', 'BufNewFile' },
+--   { pattern = 'go.work.sum', command = 'set filetype=gosum' }
+-- )
+--
+-- vim.api.nvim_create_autocmd(
+--   { 'BufRead', 'BufNewFile' },
+--   { pattern = 'go.work', command = 'set filetype=gowork' }
+-- )
+--
+-- vim.api.nvim_create_autocmd(
+--   { 'BufRead', 'BufNewFile' },
+--   { pattern = 'go.mod', command = 'set filetype=gomod' }
+-- )
