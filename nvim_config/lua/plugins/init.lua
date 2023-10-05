@@ -10,6 +10,8 @@ return {
   { "tpope/vim-repeat", lazy = false },
   { "tpope/vim-sensible", lazy = false },
   { "tpope/vim-surround", lazy = false },
+  { "tpope/vim-sleuth", lazy = false },
+  { 'folke/neodev.nvim' },
   { "machakann/vim-highlightedyank", lazy = false },
   { 'tpope/vim-fugitive' },
   { "ntpeters/vim-better-whitespace" },

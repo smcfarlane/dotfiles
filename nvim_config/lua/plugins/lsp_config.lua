@@ -22,6 +22,8 @@ return {
       },
     }
     lspconfig.tsserver.setup {}
+    -- lspconfig.denols.setup {}
+    require'lspconfig'.svelte.setup{}
     require 'lspconfig'.tailwindcss.setup {
       filetypes = {
         "eruby",
