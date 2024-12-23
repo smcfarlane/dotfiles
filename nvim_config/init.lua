@@ -49,3 +49,4 @@ require("lazy").setup("plugins", {
 })
 require('keymaps')
 require('autocmds')
+require('treesitter_conf')

@@ -6,8 +6,12 @@ return {
     local lspconfig = require('lspconfig')
     local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-    lspconfig.solargraph.setup {}
-    -- lspconfig.ruby_ls.setup{}
+    -- lspconfig.solargraph.setup {}
+    lspconfig.ruby_ls.setup {
+      capabilities = capabilities,
+      filetypes = { 'ruby', 'eruby', 'rubyhtml', 'rakefile', 'rake', 'gemfile', 'gemspec', 'guardfile', 'capfile', 'haml' },
+      formatter = { 'auto' }
+    }
     lspconfig.gopls.setup {
       capabilities = capabilities,
     }
@@ -21,8 +25,8 @@ return {
         },
       },
     }
-    lspconfig.tsserver.setup {}
-    -- lspconfig.denols.setup {}
+    -- lspconfig.tsserver.setup {}
+    lspconfig.denols.setup {}
     require'lspconfig'.svelte.setup{}
     require 'lspconfig'.tailwindcss.setup {
       filetypes = {
@@ -31,6 +35,8 @@ return {
         "gohtml",
         "gohtmltmpl",
         "svelte",
+        "haml",
+        "vue",
       },
     }
     -- vim.lsp.set_log_level("debug")

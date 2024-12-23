@@ -4,7 +4,7 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd("colorscheme duskfox")
+      vim.cmd("colorscheme terafox")
     end,
   },
   { "tpope/vim-repeat", lazy = false },
@@ -15,16 +15,17 @@ return {
   { "machakann/vim-highlightedyank", lazy = false },
   { 'tpope/vim-fugitive' },
   { "ntpeters/vim-better-whitespace" },
-  -- { "vim-ruby/vim-ruby" },
+  { "vim-ruby/vim-ruby" },
   { "tpope/vim-rails" },
   { "tpope/vim-haml" },
   { "ekalinin/Dockerfile.vim" },
   { "towolf/vim-helm" },
   {
-    "nvim-treesitter/nvim-treesitter",
-    opts = {
-      ensure_installed = {"lua", "vim", "html", "css", "bash", "ruby", "javascript", "json", "yaml"},
+    'nvim-treesitter/nvim-treesitter',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter-textobjects',
     },
+    build = ':TSUpdate',
   },
   {
     'numToStr/Comment.nvim',
@@ -56,17 +57,17 @@ return {
       map('n', '<leader>[b', ':BufferLineMovePrev<CR>', { desc = 'move buffer previous' })
     end
   },
-  {
-  "ray-x/go.nvim",
-    dependencies = {  -- optional packages
-      "ray-x/guihua.lua",
-      "nvim-treesitter/nvim-treesitter",
-    },
-    config = function()
-      require("go").setup()
-    end,
-    event = {"CmdlineEnter"},
-    ft = {"go", 'gomod'},
-    build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
-  }
+  -- {
+  -- "ray-x/go.nvim",
+  --   dependencies = {  -- optional packages
+  --     "ray-x/guihua.lua",
+  --     "nvim-treesitter/nvim-treesitter",
+  --   },
+  --   config = function()
+  --     require("go").setup()
+  --   end,
+  --   event = {"CmdlineEnter"},
+  --   ft = {"go", 'gomod'},
+  --   build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
+  -- }
 }
