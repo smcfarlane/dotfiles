@@ -1,0 +1,32 @@
+[user]
+	name = Steven McFarlane
+	email = steven@scientist.com
+[core]
+	autocrlf = input
+	editor = nvim
+	excludesfile = /Users/stevenmcfarlane/.gitignore
+[push]
+	default = simple
+	followTags = true
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	undolast = reset --soft HEAD~
+	last = log -1 HEAD
+	prune = fetch --prune
+	undo = reset --soft HEAD^
+	stash-all = stash save --include-untracked
+	glog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+[status]
+	showUntrackedFiles = all
+[difftool]
+	prompt = false
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+[init]
+	defaultBranch = main
